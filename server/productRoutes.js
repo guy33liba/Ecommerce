@@ -3,6 +3,8 @@ import Product from "./ProductSchema.js";
 
 const router = express.Router();
 
+//
+
 router.get("/", async (req, res) => {
  try {
   const products = await Product.find();
@@ -11,6 +13,8 @@ router.get("/", async (req, res) => {
   res.status(500).json({ message: "Server error" });
  }
 });
+
+//
 
 router.get("/:id", async (req, res) => {
  try {
@@ -21,6 +25,9 @@ router.get("/:id", async (req, res) => {
   res.status(500).send({ message: "Server error" });
  }
 });
+
+//
+
 router.post("/", async (req, res) => {
  const { name, price, image } = req.body;
  try {
