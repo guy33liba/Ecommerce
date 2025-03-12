@@ -4,33 +4,60 @@ import Cart from "../schema/CartSchema.js"; // Adjust this path as needed
 const router = express.Router();
 
 // Add item to cart
-router.post("/api/cart", async (req, res) => {
+router.post("/", async (req, res) => {
  try {
-  const { userId, productId, quantity } = req.body;
+  const { productId, quantity } = req.body;
+  console.log(productId);
+  let cartItem = await Cart.findOne({ productId });
 
-  // Validate input data
-  if (!userId || !productId || quantity == null) {
-   return res.status(400).json({ message: "Missing required fields" });
+  if (cartItem) {
+   cartItem.quantity += quantity;
+   await cartItem.save();
+  } else {
+   cartItem = new Cart({ productId, quantity });
+   await cartItem.save();
   }
-
-  // Check if the product already exists in the user's cart
-  const existingItem = await Cart.findOne({ userId, productId });
-  if (existingItem) {
-   // If the item exists, update the quantity
-   existingItem.quantity += quantity; // Increase the quantity by the specified amount
-   await existingItem.save();
-   return res.status(200).json(existingItem); // Return updated cart item
-  }
-
-  // If the item doesn't exist, create a new cart item
-  const newItem = new Cart({ userId, productId, quantity });
-  await newItem.save();
-
-  return res.status(201).json(newItem); // Return the newly added cart item
+  const allcartItems = await Cart.find();
+  res.status(201).json(allcartItems);
  } catch (error) {
   console.error("Error adding item to cart:", error);
   return res.status(500).json({ message: "Failed to add item to cart" });
  }
 });
 
+router.get("/", async (req, res) => {
+ try {
+  const cartItems = await Cart.find().populate("productId");
+  res.status(200).json(cartItems);
+ } catch (error) {
+  res.status(500).json({ message: "Error fetching cart items", error });
+ }
+});
+
+router.put("/:id", async (req, res) => {
+ try {
+  const { quantity } = req.body;
+  const { id } = req.params;
+
+  const cartItem = await Cart.findById(id);
+  if (!cartItem) return res.status(404).json({ message: "Cart item not found" });
+  cartItem.quantity = quantity;
+  await cartItem.save();
+  res.status(200).json(cartItem);
+ } catch (error) {
+  res.status(500).json({ message: "Error updaing cart Item", error });
+ }
+});
+
+router.delete("/:id", async (req, res) => {
+ try {
+  const { id } = req.params;
+  await Cart.findByIdAndDelete(id);
+  const updatedCart = await Cart.find();
+  res.status(200).json(updatedCart);
+ } catch (error) {
+  console.error("Error deleting cart item:", error);
+  res.status(500).json({ message: "Error deleting cart item", error });
+ }
+});
 export default router;

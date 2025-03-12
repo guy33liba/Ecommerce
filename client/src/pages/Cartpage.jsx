@@ -1,30 +1,21 @@
 import React from "react";
-import { useCartContext } from "../context/CartContext"; // ✅ Import context
+import { useCartContext } from "../context/CartContext";
 
-const Cartpage = () => {
- const { cart, setCart } = useCartContext(); // ✅ Use useState-based context
-
- const removeFromCart = (id) => {
-  setCart(cart.filter((item) => item.id !== id)); // ✅ Remove item from cart
- };
-
- const clearCart = () => {
-  setCart([]); // ✅ Clear cart
- };
+const CartPage = () => {
+ const { cart, removeFromCart, clearCart } = useCartContext();
 
  if (cart.length === 0) {
   return <div>Your cart is empty.</div>;
  }
-
  return (
   <div>
    <h1>Your Cart</h1>
-   {cart.map((item) => (
-    <div key={item.id}>
+   {cart?.map((item) => (
+    <div key={item._id}>
      <h3>{item.name}</h3>
      <p>Price: ${item.price}</p>
      <img src={item.image} alt="" />
-     <button onClick={() => removeFromCart(item.id)}>Remove</button>
+     <button onClick={() => removeFromCart(item._id)}>Remove</button>
     </div>
    ))}
    <button onClick={clearCart}>Clear Cart</button>
@@ -32,4 +23,4 @@ const Cartpage = () => {
  );
 };
 
-export default Cartpage;
+export default CartPage;

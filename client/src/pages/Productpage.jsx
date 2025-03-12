@@ -38,7 +38,14 @@ const Productpage = () => {
      <img src={product.image} alt={product.name} width="300" />
      <p>Price: ${product.price.toFixed(2)}</p>
      <p>{product.description}</p>
-     <button onClick={addToCart}>Add to Cart</button>
+     <button
+      onClick={() => {
+       console.log(product._id);
+       addToCart(product);
+      }}
+     >
+      Add to Cart
+     </button>
      {message && <h1>Added To Cart</h1>}
     </>
    ) : (

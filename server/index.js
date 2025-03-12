@@ -7,7 +7,7 @@ import { products } from "./listofproducts.js";
 import Product from "./schema/ProductSchema.js";
 
 const mongoUri =
- "mongodb+srv://guyliba:guyliba33@cluster0.wx8mm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+ "mongodb+srv://guyliba:guyliba33@e-commerce.wx8mm.mongodb.net/?retryWrites=true&w=majority&appName=e-commerce";
 
 const app = express();
 
