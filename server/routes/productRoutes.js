@@ -1,5 +1,5 @@
 import express from "express";
-import Product from "./ProductSchema.js";
+import Product from "../schema/ProductSchema.js";
 
 const router = express.Router();
 
@@ -20,8 +20,9 @@ router.get("/:id", async (req, res) => {
  try {
   const product = await Product.findById(req.params.id);
   if (!product) return res.status(404).json({ message: "Product not Found" });
-  req.json(product);
+  res.json(product);
  } catch (error) {
+  console.log(error);
   res.status(500).send({ message: "Server error" });
  }
 });

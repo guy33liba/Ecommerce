@@ -4,13 +4,13 @@ import Homepage from "./pages/Homepage";
 import Productpage from "./pages/Productpage";
 import Checkoutpage from "./pages/Checkoutpage";
 import Header from "./components/Header";
-import ProductContext from "./context/ProductContext";
 import Cartpage from "./pages/Cartpage";
 import CartProvider from "./context/CartContext";
+import ProductProvider from "./context/Productcontext";
 function App() {
  return (
   <div>
-   <ProductContext>
+   <ProductProvider>
     <CartProvider>
      <Router>
       <Header />
@@ -19,10 +19,11 @@ function App() {
        <Route path="/product/:id" element={<Productpage />} />
        <Route path="/cart" element={<Cartpage />} />
        <Route path="/checkout" element={<Checkoutpage />} />
+       <Route path="/productpage" element={<Productpage />} />
       </Routes>
      </Router>
     </CartProvider>
-   </ProductContext>
+   </ProductProvider>
   </div>
  );
 }

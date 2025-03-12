@@ -24,7 +24,7 @@ const Checkoutpage = () => {
   setForm((prevForm) => ({ ...prevForm, isPaymentProcessing: true }));
 
   try {
-   const response = await axios.post("/api/payment", {
+   const response = await axios.post("http://localhost:5000/api/products", {
     shippingAddress: form.shippingAddress,
     paymentMethod: form.paymentMethod,
     items: cart,

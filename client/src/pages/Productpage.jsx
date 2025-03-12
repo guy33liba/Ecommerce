@@ -1,29 +1,49 @@
-import axios from "axios";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
+import { useCartContext } from "../context/CartContext";
 
 const Productpage = () => {
- const { id } = useParams();
+ const { id } = useParams(); // ✅ Get product ID from URL
  const [product, setProduct] = useState(null);
+ const [loading, setLoading] = useState(true);
+ const [error, setError] = useState(null);
+
+ const { addToCart, message } = useCartContext();
 
  useEffect(() => {
   const fetchProduct = async () => {
-   const result = await axios.get(`/products/${id}`);
-   setProduct(result.data);
+   try {
+    const result = await axios.get(`http://localhost:5000/api/products/${id}`);
+    setProduct(result.data);
+   } catch (err) {
+    console.error("Error fetching product:", err);
+    setError("Failed to load product. Please try again later.");
+   } finally {
+    setLoading(false);
+   }
   };
+
   fetchProduct();
  }, [id]);
- if (!product) {
-  return <div>Loading...</div>;
- }
+
+ if (loading) return <h2>Loading product...</h2>;
+ if (error) return <h2 style={{ color: "red" }}>{error}</h2>;
+
  return (
-  <div>
-   <h1>{product.name}</h1>
-   <img src={product.image} alt="" />
-   <p>{product.description}</p>
-   <p>Price: ${product.price}</p>
-   <button>Add To Cart</button>
+  <div className="singleProductContainer">
+   {product ? (
+    <>
+     <h1>{product.name}</h1>
+     <img src={product.image} alt={product.name} width="300" />
+     <p>Price: ${product.price.toFixed(2)}</p>
+     <p>{product.description}</p>
+     <button onClick={addToCart}>Add to Cart</button>
+     {message && <h1>Added To Cart</h1>}
+    </>
+   ) : (
+    <h2>Product not found.</h2>
+   )}
   </div>
  );
 };

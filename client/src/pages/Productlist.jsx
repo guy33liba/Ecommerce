@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useProductContext } from "../context/Productcontext";
 const Productlist = () => {
- const [products, setProducts] = useState([]);
+ const { products, setProducts } = useProductContext();
  const [loading, setLoading] = useState(true);
  const [error, setError] = useState(null);
 
@@ -10,7 +11,6 @@ const Productlist = () => {
   const fetchProducts = async () => {
    try {
     const result = await axios.get("http://localhost:5000/api/products"); // Adjust API URL if needed
-    console.log(result.data);
     setProducts(result.data);
    } catch (err) {
     console.error("Error fetching products:", err);
