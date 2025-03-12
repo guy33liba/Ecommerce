@@ -258,3 +258,130 @@ body {
   opacity: 1;
  }
 }
+
+/* cart list page */
+/* Cart page container */
+/* Cart page container */
+.cartPage {
+ font-family: Arial, sans-serif;
+ padding: 20px;
+ background-color: #f7f7f7;
+ min-height: 100vh;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: flex-start;
+}
+
+/* Heading style */
+.cartPage h1 {
+ font-size: 2rem;
+ font-weight: 600;
+ color: #333;
+ margin-bottom: 20px;
+ text-align: center;
+}
+
+/* Cart list container */
+.cartListContainer {
+ display: grid;
+ grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+ gap: 20px;
+ max-width: 1200px;
+ width: 100%;
+ padding: 0 15px;
+ margin-bottom: 30px;
+}
+
+/* Individual cart item */
+.cartItem {
+ background-color: #dadadace;
+ border-radius: 12px;
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ padding: 20px;
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;
+ align-items: center;
+ width: 350px;
+ height: 400px; /* Adjust to maintain consistent item size */
+ transition: transform 0.3s ease-in-out;
+ overflow: hidden;
+ box-shadow: 1px 1px 20px;
+}
+
+/* Hover effect for cart item */
+.cartItem:hover {
+ transform: translateY(-5px);
+}
+
+/* Cart item title */
+.cartItem h3 {
+ font-size: 1.2rem;
+ font-weight: bold;
+ color: #444;
+ text-align: center;
+ margin-bottom: 10px;
+}
+
+/* Price and quantity styling */
+.cartItem p {
+ font-size: 1rem;
+ color: #777;
+ margin: 5px 0;
+ text-align: center;
+}
+
+/* Cart item image styling */
+.cartItem img {
+ max-width: 100%;
+ max-height: 200px;
+ border-radius: 8px;
+ object-fit: contain;
+ margin-bottom: 15px;
+}
+
+/* Remove button styling */
+.cartItem button {
+ background-color: #ff4d4d;
+ color: white;
+ border: none;
+ padding: 10px;
+ border-radius: 5px;
+ cursor: pointer;
+ transition: background-color 0.3s ease;
+ align-self: center;
+ margin-top: auto;
+}
+
+.cartItem button:hover {
+ background-color: #ff1a1a;
+}
+
+/* Clear cart button */
+.clearCartButton {
+ background-color: #007bff;
+ color: white;
+ padding: 10px 20px;
+ border-radius: 5px;
+ font-size: 1rem;
+ cursor: pointer;
+ transition: background-color 0.3s ease;
+}
+
+.clearCartButton:hover {
+ background-color: #0056b3;
+}
+
+/* Empty cart message */
+.emptyCartMessage {
+ font-size: 1.2rem;
+ color: #555;
+ text-align: center;
+ margin-top: 50px;
+ font-weight: bold;
+}
+.itemName {
+ width: 300px;
+ height: 100px;
+}
