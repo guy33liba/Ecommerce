@@ -1,27 +1,38 @@
 import express from "express";
 import Cart from "../schema/CartSchema.js"; // Adjust this path as needed
+import Product from "../schema/ProductSchema.js"; // Adjust path as needed
 
 const router = express.Router();
 
-// Add item to cart
 router.post("/", async (req, res) => {
  try {
-  const { productId, quantity, name, price, image } = req.body;
-  console.log(productId);
+  const { productId, quantity } = req.body;
+
+  const product = await Product.findById(productId);
+  if (!product) {
+   return res.status(404).json({ message: "Product not found" });
+  }
+
   let cartItem = await Cart.findOne({ productId });
 
   if (cartItem) {
    cartItem.quantity += quantity;
-   await cartItem.save();
   } else {
-   cartItem = new Cart({ productId, quantity, name, price, image });
-   await cartItem.save();
+   cartItem = new Cart({
+    productId,
+    quantity,
+    name: product.name,
+    price: product.price,
+    image: product.image,
+   });
   }
-  const allcartItems = await Cart.find();
-  res.status(201).json(allcartItems);
+
+  await cartItem.save();
+  const allCartItems = await Cart.find();
+  res.status(201).json(allCartItems);
  } catch (error) {
   console.error("Error adding item to cart:", error);
-  return res.status(500).json({ message: "Failed to add item to cart" });
+  res.status(500).json({ message: "Failed to add item to cart" });
  }
 });
 
