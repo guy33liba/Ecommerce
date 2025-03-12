@@ -71,4 +71,13 @@ router.delete("/:id", async (req, res) => {
   res.status(500).json({ message: "Error deleting cart item", error });
  }
 });
+router.delete("/", async (req, res) => {
+ try {
+  await Cart.deleteMany({});
+  const updatedCart = await Cart.find();
+  res.status(200).json(updatedCart);
+ } catch (error) {
+  console.error("Error deleting cart");
+ }
+});
 export default router;
