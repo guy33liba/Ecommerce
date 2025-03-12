@@ -6,7 +6,7 @@ const router = express.Router();
 // Add item to cart
 router.post("/", async (req, res) => {
  try {
-  const { productId, quantity } = req.body;
+  const { productId, quantity, name, price, image } = req.body;
   console.log(productId);
   let cartItem = await Cart.findOne({ productId });
 
@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
    cartItem.quantity += quantity;
    await cartItem.save();
   } else {
-   cartItem = new Cart({ productId, quantity });
+   cartItem = new Cart({ productId, quantity, name, price, image });
    await cartItem.save();
   }
   const allcartItems = await Cart.find();
