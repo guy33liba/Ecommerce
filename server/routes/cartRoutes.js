@@ -36,6 +36,8 @@ router.post("/", async (req, res) => {
  }
 });
 
+//
+
 router.get("/", async (req, res) => {
  try {
   const cartItems = await Cart.find().populate("productId");
@@ -45,21 +47,30 @@ router.get("/", async (req, res) => {
  }
 });
 
+//
+
 router.put("/:id", async (req, res) => {
  try {
   const { quantity } = req.body;
   const { id } = req.params;
-  if (quantity < 1) return;
-  if (!cartItem) return res.status(404).json({ message: "Cart item not found" });
+
   const cartItem = await Cart.findById(id);
+  if (!cartItem) {
+   return res.status(404).json({ message: "Cart item not found" });
+  }
+
   cartItem.quantity = quantity;
   await cartItem.save();
-  const cartUpdated = await Cart.find();
-  res.status(200).json(cartItem);
+
+  const cartUpdated = await Cart.find(); // Fetch updated cart items
+  res.status(200).json(cartUpdated);
  } catch (error) {
-  res.status(500).json({ message: "Error updaing cart Item", error });
+  console.error("Error updating cart item:", error);
+  res.status(500).json({ message: "Error updating cart item", error: error.message });
  }
 });
+
+//
 
 router.delete("/:id", async (req, res) => {
  try {
@@ -72,6 +83,9 @@ router.delete("/:id", async (req, res) => {
   res.status(500).json({ message: "Error deleting cart item", error });
  }
 });
+
+//
+
 router.delete("/", async (req, res) => {
  try {
   await Cart.deleteMany({});

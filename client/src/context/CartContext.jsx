@@ -60,9 +60,9 @@ const CartProvider = ({ children }) => {
  };
  const updateQuantity = async (id, quantity) => {
   try {
-   const response = await axios.put(`/api/cart/${id}`);
-   const updatedCart = await response.json();
-   setCart(updatedCart);
+   const { data } = await axios.put(`http://localhost:5000/api/cart/${id}`, { quantity });
+   console.log(data);
+   setCart(data);
   } catch (error) {
    console.error("Error updating cart quantity", error);
   }

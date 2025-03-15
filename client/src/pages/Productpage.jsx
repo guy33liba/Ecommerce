@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useCartContext } from "../context/CartContext";
 
@@ -38,14 +38,16 @@ const Productpage = () => {
      <img src={product.image} alt={product.name} width="300" />
      <p>Price: ${product.price.toFixed(2)}</p>
      <p>{product.description}</p>
-     <button
-      onClick={() => {
-       console.log(product._id);
-       addToCart(product);
-      }}
-     >
-      Add to Cart
-     </button>
+     <Link to="/cart">
+      <button
+       onClick={() => {
+        console.log(product._id);
+        addToCart(product);
+       }}
+      >
+       Add to Cart
+      </button>
+     </Link>
      {message && <h1>Added To Cart</h1>}
     </>
    ) : (
