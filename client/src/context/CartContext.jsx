@@ -58,9 +58,19 @@ const CartProvider = ({ children }) => {
    console.error("Error clearing cart:", error.message);
   }
  };
-
+ const updateQuantity = async (id, quantity) => {
+  try {
+   const response = await axios.put(`/api/cart/${id}`);
+   const updatedCart = await response.json();
+   setCart(updatedCart);
+  } catch (error) {
+   console.error("Error updating cart quantity", error);
+  }
+ };
  return (
-  <CartContext.Provider value={{ cart, setCart, addToCart, removeFromCart, clearCart, message }}>
+  <CartContext.Provider
+   value={{ cart, setCart, addToCart, removeFromCart, clearCart, message, updateQuantity }}
+  >
    {children}
   </CartContext.Provider>
  );

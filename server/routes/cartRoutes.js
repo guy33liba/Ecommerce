@@ -49,11 +49,12 @@ router.put("/:id", async (req, res) => {
  try {
   const { quantity } = req.body;
   const { id } = req.params;
-
-  const cartItem = await Cart.findById(id);
+  if (quantity < 1) return;
   if (!cartItem) return res.status(404).json({ message: "Cart item not found" });
+  const cartItem = await Cart.findById(id);
   cartItem.quantity = quantity;
   await cartItem.save();
+  const cartUpdated = await Cart.find();
   res.status(200).json(cartItem);
  } catch (error) {
   res.status(500).json({ message: "Error updaing cart Item", error });
