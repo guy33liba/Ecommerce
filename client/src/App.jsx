@@ -1,13 +1,16 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes, Link, useLocation } from "react-router-dom";
-import Homepage from "./pages/Homepage";
-import Productpage from "./pages/Productpage";
-import Checkoutpage from "./pages/Checkoutpage";
-import Cartpage from "./pages/Cartpage";
-import CartProvider from "./context/CartContext";
-import ProductProvider from "./context/Productcontext";
-import OrderConfirmation from "./pages/OrderConfirmation";
-import Header from "./pages/Header";
+import {
+ Homepage,
+ Productpage,
+ Cartpage,
+ Checkoutpage,
+ OrderConfirmation,
+ Register,
+ Login,
+ Shipments,
+} from "./utils";
+
 function App() {
  return (
   <div>
@@ -20,8 +23,10 @@ function App() {
        <Route path="/product/:id" element={<Productpage />} />
        <Route path="/cart" element={<Cartpage />} />
        <Route path="/checkout" element={<Checkoutpage />} />
-       <Route path="/productpage" element={<Productpage />} />
        <Route path="/orderConfirmation" element={<OrderConfirmation />} />
+       <Route path="/register" element={<Register />} />
+       <Route path="/orderConfirmation" element={<Login />} />
+       <Route path="/orderConfirmation" element={<Shipments />} />
       </Routes>
      </Router>
     </CartProvider>

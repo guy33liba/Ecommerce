@@ -3,7 +3,15 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema(
  {
   name: String,
-  email: String,
+  email: {
+   type: String,
+   required: true,
+   unique: true,
+  },
+  password: {
+   type: String,
+   required: true,
+  },
   cart: [
    {
     productId: {
@@ -16,6 +24,21 @@ const userSchema = new mongoose.Schema(
      required: true,
      default: 1,
     },
+   },
+  ],
+  shipments: [
+   {
+    shipmentId: {
+     type: String,
+     required: true,
+    },
+    address: String,
+    status: {
+     type: String,
+     default: "Processing",
+    },
+    trackingNumber: String,
+    dateShipped: Date,
    },
   ],
  },
