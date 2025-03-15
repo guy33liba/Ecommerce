@@ -5,6 +5,7 @@ import productRoutes from "./routes/productRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
 import { products } from "./listofproducts.js";
 import Product from "./schema/ProductSchema.js";
+import orderRoutes from "./routes/orderRoutes.js";
 
 const mongoUri =
  "mongodb+srv://guyliba:guyliba33@e-commerce.wx8mm.mongodb.net/?retryWrites=true&w=majority&appName=e-commerce";
@@ -29,5 +30,6 @@ mongoose
 
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
+app.use("/api/orders", orderRoutes);
 
 app.listen(5000, console.log("on 5000 port"));

@@ -16,6 +16,12 @@ const Checkoutpage = () => {
 
  const handleCheckoutSubmit = async (e) => {
   e.preventDefault();
+
+  if (cart.length === 0) {
+   alert("Your cart is empty.");
+   return;
+  }
+
   if (!form.shippingAddress || !form.paymentMethod) {
    alert("Please fill out all fields.");
    return;
@@ -24,7 +30,7 @@ const Checkoutpage = () => {
   setForm((prevForm) => ({ ...prevForm, isPaymentProcessing: true }));
 
   try {
-   const response = await axios.post("http://localhost:5000/api/products", {
+   const response = await axios.post("http://localhost:5000/api/orders", {
     shippingAddress: form.shippingAddress,
     paymentMethod: form.paymentMethod,
     items: cart,

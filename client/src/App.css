@@ -541,3 +541,143 @@ body {
  text-align: center;
  margin-top: 15px;
 }
+
+/* confirmation order page */
+
+/* // */
+/* Order Confirmation Container */
+/* Order Confirmation Container */
+.orderConfirmationContainer {
+ font-family: Arial, sans-serif;
+ max-width: 1200px;
+ margin: 0 auto;
+ background-color: #f9f9f9;
+}
+
+/* Title and Subtitle */
+.orderConfirmationContainer h1,
+.orderConfirmationContainer h3 {
+ color: #333;
+ text-align: center;
+ margin-bottom: 10px;
+}
+
+.orderConfirmationContainer h3 {
+ font-size: 22px;
+}
+
+.orderConfirmationContainer p {
+ font-size: 16px;
+ color: #666;
+ text-align: center;
+ margin-bottom: 30px;
+}
+
+/* Order Details Section */
+.orderDetails {
+ background-color: white;
+ border-radius: 8px;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ padding: 20px;
+ margin-top: 20px;
+}
+
+.orderDetails h3 {
+ font-size: 20px;
+ color: #333;
+ margin-bottom: 10px;
+}
+
+.orderDetails h4 {
+ font-size: 16px;
+ margin-bottom: 10px;
+ color: #555;
+}
+
+/* Cart Items */
+.orderConfirmationCartItem {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ border-bottom: 1px solid #ddd;
+ padding: 15px 0;
+ margin-bottom: 10px;
+}
+
+.orderConfirmationCartItemDiv {
+ display: flex;
+ align-items: center;
+}
+
+.orderConfirmationCartItemDiv img {
+ width: 100px;
+ height: 80px;
+ margin-left: 100px;
+ margin-right: 20px;
+ border-radius: 5px;
+}
+
+.orderConfirmationCartItemDiv h3 {
+ font-size: 18px;
+ width: 200px;
+ color: #333;
+}
+
+/* Price Formatting */
+.orderConfirmationCartItem p {
+ font-size: 16px;
+ color: #333;
+ margin: 0;
+ font-weight: bold;
+}
+
+/* Total Price */
+.orderDetails .total {
+ font-size: 22px;
+ font-weight: bold;
+ color: #333;
+ margin-top: 20px;
+ text-align: right;
+ margin-bottom: 20px;
+}
+
+/* Button */
+.orderConfirmationContainer button {
+ display: block;
+ width: 100%;
+ padding: 15px;
+ background-color: #007bff;
+ color: #fff;
+ border: none;
+ font-size: 16px;
+ cursor: pointer;
+ margin-top: 20px;
+ border-radius: 8px;
+ transition: background-color 0.3s ease;
+ margin: 10px auto 0;
+}
+.thankYouMessage {
+ font-size: 2rem;
+ font-weight: bold;
+ text-align: center;
+ animation: colorChange 3s infinite alternate; /* Add animation */
+}
+
+/* Animation to change text color */
+@keyframes colorChange {
+ 0% {
+  color: #ff5733; /* Red */
+ }
+ 25% {
+  color: #21b83d; /* Green */
+ }
+ 50% {
+  color: #3357ff; /* Blue */
+ }
+ 75% {
+  color: #887f1c; /* Yellow */
+ }
+ 100% {
+  color: #ff33b5; /* Pink */
+ }
+}
