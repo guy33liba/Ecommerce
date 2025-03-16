@@ -38,6 +38,11 @@
  background: #555;
  border-radius: 5px;
 }
+.headerContainer .loginLink {
+ text-decoration: underline;
+ position: relative;
+ left: 25vw;
+}
 
 /* homepage */
 
