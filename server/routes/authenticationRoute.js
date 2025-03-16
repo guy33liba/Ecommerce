@@ -46,8 +46,10 @@ router.post("/login", async (req, res) => {
   }
 
   // Generate a JWT token and send it back to the user
-  const token = jwt.sign({ _id: user._id }, "yourJwtSecret", { expiresIn: "1h" });
-  res.status(200).json({ token });
+  const token = jwt.sign({ _id: user._id, name: user.name, email: user.email }, "yourJwtSecret", {
+   expiresIn: "1h",
+  });
+  res.status(200).json({ token, user: { name: user.name, email: user.email } });
  } catch (error) {
   res.status(500).json({ message: "Server error", error });
  }
@@ -63,6 +65,7 @@ const authenticateUser = async (req, res, next) => {
  try {
   const verified = jwt.verify(token, "yourJwtSecret");
   req.user = verified;
+  consle.log(req.user);
   next();
  } catch (error) {
   res.status(400).json({ message: "Invalid Token" });
@@ -71,20 +74,20 @@ const authenticateUser = async (req, res, next) => {
 
 //get shipments
 
-router.get("/shipments", authenticateUser, async (req, res) => {
- try {
-  const userId = req.user._id;
-  const user = await User.findById(userId).populate("shipments");
+// router.get("/shipments", authenticateUser, async (req, res) => {
+//  try {
+//   const userId = req.user._id;
+//   const user = await User.findById(userId).populate("shipments");
 
-  if (!user) {
-   return res.status(404).json({ message: "User not found" });
-  }
+//   if (!user) {
+//    return res.status(404).json({ message: "User not found" });
+//   }
 
-  const shipments = user.shipments;
-  res.status(200).json({ shipments });
- } catch (error) {
-  res.status(500).json({ message: "Server error", error });
- }
-});
+//   const shipments = user.shipments;
+//   res.status(200).json({ shipments });
+//  } catch (error) {
+//   res.status(500).json({ message: "Server error", error });
+//  }
+// });
 
 export default router;

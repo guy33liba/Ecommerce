@@ -11,6 +11,7 @@ function Login() {
  const [errorMessage, setErrorMessage] = useState("");
  const [showPassword, setShowPassword] = useState(false);
  const [rememberMe, setRememberMe] = useState(false);
+ const [user, setUser] = useState("");
  const navigate = useNavigate();
 
  const handleSubmit = async (e) => {
@@ -21,24 +22,22 @@ function Login() {
     password,
    });
 
-   const { token } = data;
-   if (rememberMe) {
-    localStorage.setItem("token", token);
-   } else {
-    sessionStorage.setItem("token", token);
-   }
-   navigate("/shipments");
+   localStorage.setItem("token", data.token);
+   sessionStorage.setItem("token", data.user);
+   navigate("/");
   } catch (error) {
    setErrorMessage("Invalid credentials, please try again.");
    console.error(error.response?.data || error.message);
   }
  };
+ console.log(user);
 
  return (
   <div className="loginWrapper">
    <div className="loginContainer">
     {errorMessage && <p className="errorMessage">{errorMessage}</p>}
     <h2>Login</h2>
+    <h2>{user}</h2>
     <form onSubmit={handleSubmit}>
      <div className="inputGroup">
       <input

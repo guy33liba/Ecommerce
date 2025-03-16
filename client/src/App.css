@@ -290,8 +290,8 @@ body {
  display: grid;
  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
  gap: 20px;
- max-width: 1200px;
- width: 100%;
+ width: 80%;
+ height: 350px;
  padding: 0 15px;
  margin-bottom: 30px;
  border: 3px solid black;
@@ -317,6 +317,8 @@ body {
  display: flex;
  flex-direction: column;
  margin-left: 10px;
+ border: 1px solid black;
+ margin-top: 20px;
  justify-content: center;
  align-items: center;
  width: 300px;
@@ -794,7 +796,7 @@ h2 {
  right: 10px;
  top: 50%;
  font-size: 30px;
- transform: translateY(-40%);
+ transform: translateY(-55%);
  cursor: pointer;
  color: #555;
 }
@@ -864,4 +866,94 @@ button:hover {
  color: red;
  font-size: 14px;
  margin-bottom: 10px;
+}
+
+/* register page */
+
+/* Wrapper for centering */
+.registerWrapper {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ height: 100vh;
+ background-color: #f4f4f4;
+}
+
+/* Container for the registration box */
+.registerContainer {
+ width: 100%;
+ max-width: 380px;
+ padding: 25px;
+ background: white;
+ border-radius: 10px;
+ box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+ text-align: center;
+}
+
+/* Heading */
+h2 {
+ margin-bottom: 20px;
+ color: #333;
+}
+
+/* Input group with spacing */
+.inputGroup {
+ position: relative;
+}
+
+.inputGroup input {
+ width: 100%;
+ padding: 12px;
+ border: 1px solid #ccc;
+ border-radius: 5px;
+ margin-bottom: 20px;
+ font-size: 16px;
+ outline: none;
+}
+
+.inputGroup input:focus {
+ border-color: #007bff;
+ box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Register button */
+button {
+ width: 100%;
+ padding: 12px;
+ background-color: #007bff;
+ color: white;
+ font-size: 16px;
+ border: none;
+ border-radius: 5px;
+ cursor: pointer;
+ transition: background 0.3s ease;
+}
+
+button:hover {
+ background-color: #0056b3;
+}
+
+/* Login prompt */
+.registerPrompt {
+ margin-top: 15px;
+ font-size: 14px;
+}
+
+.registerPrompt a {
+ color: #007bff;
+ text-decoration: none;
+}
+
+.registerPrompt a:hover {
+ text-decoration: underline;
+}
+
+/* Error message */
+.errorMessage {
+ color: red;
+ font-size: 14px;
+ margin-bottom: 10px;
+}
+.registerPasswordToggle {
+ transform: translateY(34%);
 }
