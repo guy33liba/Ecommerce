@@ -7,28 +7,17 @@ const CartPage = () => {
  const { cart, removeFromCart, clearCart, updateQuantity } = useCartContext();
  const [message, setMessage] = useState("");
 
- // ✅ Function to handle the message when an item is added
- const handleAddedToCartMessage = async () => {
-  try {
-   const { data } = await axios.get("http://localhost:5000/api/cart");
-   if (data.length > 0) {
-    const lastAddedItem = data[data.length - 1]; // Get the last item in the cart
-    setMessage(`${lastAddedItem.name} is added to the cart!`);
+ const handleAddedToCartMessage = (item) => {
+  setMessage(`${item.name} has been added/updated in the cart!`);
 
-    // Hide message after 2 seconds
-    setTimeout(() => setMessage(""), 2000);
-   }
-  } catch (error) {
-   console.error("Error fetching cart data:", error);
-  }
+  setTimeout(() => setMessage(""), 2000);
  };
 
- const handleUpdatequantity = (id, newQuantity) => {
+ const handleUpdateQuantity = (id, newQuantity) => {
+  const itemToUpdate = cart.find((item) => item._id === id);
   updateQuantity(id, newQuantity);
-  handleAddedToCartMessage(cart);
+  handleAddedToCartMessage(itemToUpdate);
  };
-
- //
 
  if (cart.length === 0) {
   return <div className="emptyCartMessage">Your cart is empty.</div>;
@@ -48,13 +37,13 @@ const CartPage = () => {
 
        <div className="quantityControls">
         <button
-         onClick={() => handleUpdatequantity(item._id, item.quantity - 1)}
+         onClick={() => handleUpdateQuantity(item._id, item.quantity - 1)}
          disabled={item.quantity <= 1}
         >
          -
         </button>
         <span>{item.quantity}</span>
-        <button onClick={() => handleUpdatequantity(item._id, item.quantity + 1)}>+</button>
+        <button onClick={() => handleUpdateQuantity(item._id, item.quantity + 1)}>+</button>
        </div>
       </div>
 

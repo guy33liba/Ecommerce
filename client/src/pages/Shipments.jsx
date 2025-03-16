@@ -4,29 +4,28 @@ import axios from "axios";
 function Shipments() {
  const [shipments, setShipments] = useState([]);
 
- // Fetch the token from localStorage (or wherever you store it)
  const token = localStorage.getItem("token");
 
  useEffect(() => {
   const fetchShipments = async () => {
    if (!token) {
     console.error("Token is missing.");
-    return; // Do nothing if token is not found
+    return;
    }
 
    try {
     const { data } = await axios.get("http://localhost:5000/api/users/shipments", {
-     headers: { Authorization: `Bearer ${token}` }, // Correct header format
+     headers: { Authorization: `Bearer ${token}` },
     });
 
-    setShipments(data.shipments); // Assuming the response contains a 'shipments' array
+    setShipments(data.shipments);
    } catch (error) {
     console.error("Error fetching shipments:", error.response?.data || error.message);
    }
   };
 
   fetchShipments();
- }, [token]); // Only re-run the effect if the token changes
+ }, [token]);
 
  return (
   <div>

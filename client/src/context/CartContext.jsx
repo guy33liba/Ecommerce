@@ -9,7 +9,7 @@ const CartContext = createContext();
 const CartProvider = ({ children }) => {
  const { id } = useParams();
  const [cart, setCart] = useState([]);
- const [message, setMessage] = useState(false);
+ const [message, setMessage] = useState("");
 
  useEffect(() => {
   const fetchCart = async () => {
@@ -33,8 +33,7 @@ const CartProvider = ({ children }) => {
    });
 
    setCart(data);
-   setMessage(true);
-
+   setMessage(`${item.name} has been added to the cart!`);
    setTimeout(() => setMessage(false), 2000);
   } catch (error) {
    console.error("Error adding item to cart:", error.response?.data || error.message);
