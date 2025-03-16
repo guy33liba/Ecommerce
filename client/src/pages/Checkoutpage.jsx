@@ -4,7 +4,7 @@ import { useCartContext } from "../context/CartContext";
 import axios from "axios";
 
 const Checkoutpage = () => {
- const { cart } = useCartContext(); // ✅ Fix: Now cart is correctly retrieved
+ const { cart, updateQuantity, removeFromCart } = useCartContext();
  const [form, setForm] = useState({
   shippingAddress: "",
   paymentMethod: "",
@@ -49,6 +49,7 @@ const Checkoutpage = () => {
    setForm((prevForm) => ({ ...prevForm, isPaymentProcessing: false }));
   }
  };
+
  return (
   <div className="checkoutContainer">
    <h1>Checkout</h1>
@@ -61,15 +62,18 @@ const Checkoutpage = () => {
     ) : (
      <>
       {cart.map((item) => (
-       <div className="cartItem" key={item.id}>
+       <div className="cartItem" key={item._id}>
         <div className="cartItemDiv">
          <h3>{item.name}</h3>
-         <img src={item.image} alt="" />
-         <div className="cartItemDiv">
-          <p>{item.quantity}</p>
-         </div>
+         <img src={item.image} alt={item.name} />
         </div>
-        <p>${item.price.toFixed(2)}</p>
+        <div className="quantityControls">
+         <button onClick={() => updateQuantity(item._id, item.quantity - 1)}>-</button>
+         <span>{item.quantity}</span>
+         <button onClick={() => updateQuantity(item._id, item.quantity + 1)}>+</button>
+        </div>
+        <p>${(item.price * item.quantity).toFixed(2)}</p>
+        <button onClick={() => removeFromCart(item._id)}>Remove</button>
        </div>
       ))}
       <h3 className="totalPrice">Total: ${total.toFixed(2)}</h3>

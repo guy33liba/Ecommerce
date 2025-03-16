@@ -7,7 +7,6 @@ const CartContext = createContext();
 
 // ✅ Provider component
 const CartProvider = ({ children }) => {
- const { id } = useParams();
  const [cart, setCart] = useState([]);
  const [message, setMessage] = useState("");
 

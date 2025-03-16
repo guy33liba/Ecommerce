@@ -9,7 +9,6 @@ const CartPage = () => {
 
  const handleAddedToCartMessage = (item) => {
   setMessage(`${item.name} has been added/updated in the cart!`);
-
   setTimeout(() => setMessage(""), 2000);
  };
 
