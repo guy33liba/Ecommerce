@@ -418,7 +418,6 @@ body {
 
 /* checkout page */
 
-/* General Styles */
 .checkoutContainer {
  font-family: Arial, sans-serif;
  background-color: #f3f3f3;
@@ -426,7 +425,6 @@ body {
  margin-left: 10%;
 }
 
-/* Checkout Heading */
 .checkoutContainer h1 {
  font-size: 2rem;
  font-weight: bold;
@@ -434,7 +432,6 @@ body {
  margin-bottom: 20px;
 }
 
-/* Order Summary Box */
 .orderSummary {
  background-color: #fff;
  border-radius: 10px;
@@ -444,7 +441,6 @@ body {
  margin-bottom: 20px;
 }
 
-/* Order Summary Title */
 .orderSummary h3 {
  font-size: 1.5rem;
  color: #333;
@@ -454,6 +450,7 @@ body {
 }
 
 /* Cart Item */
+
 .checkoutContainer .cartItem {
  align-items: center;
  gap: 50px;
