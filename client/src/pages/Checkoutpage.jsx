@@ -60,7 +60,7 @@ const Checkoutpage = () => {
      <p>Your cart is empty.</p>
     ) : (
      <>
-      {message && <h2 className="cartMessage">{message}</h2>}
+      {message && <h4 className="checkoutCartMessage">{message}</h4>}
 
       {cart.map((item) => (
        <div className="cartItem" key={item._id}>
