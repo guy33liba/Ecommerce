@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useProductContext } from "../context/Productcontext";
-import jwt_decode from "jwt-decode";
+// import jwt_decode from "jwt-decode";
 
 const Productlist = () => {
  const { products, setProducts } = useProductContext();
@@ -11,10 +11,10 @@ const Productlist = () => {
  const [name, setName] = useState("");
  useEffect(() => {
   const token = localStorage.getItem("token") || sessionStorage.getItem("token");
-  if (token) {
-   const decodedToken = jwt_decode(token); // Decode the token
-   setName(decodedToken); // Set user name (or any other data from the token)
-  }
+  // if (token) {
+  //  const decodedToken = jwt_decode(token); // Decode the token
+  //  setName(decodedToken); // Set user name (or any other data from the token)
+  // }
   const fetchProducts = async () => {
    try {
     const result = await axios.get("http://localhost:5000/api/products");
