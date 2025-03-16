@@ -12,7 +12,7 @@ const Checkoutpage = () => {
  });
 
  const navigate = useNavigate();
- const total = cart.reduce((sum, item) => sum + item.price, 0);
+ const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
  const handleCheckoutSubmit = async (e) => {
   e.preventDefault();
