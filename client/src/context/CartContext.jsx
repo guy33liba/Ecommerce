@@ -27,12 +27,12 @@ const CartProvider = ({ children }) => {
   try {
    console.log("Adding to cart:", { productId: item?._id });
 
-   const response = await axios.post("http://localhost:5000/api/cart", {
+   const { data } = await axios.post("http://localhost:5000/api/cart", {
     productId: item?._id,
     quantity: 1,
    });
 
-   setCart(response.data);
+   setCart(data);
    setMessage(true);
 
    setTimeout(() => setMessage(false), 2000);
@@ -69,7 +69,16 @@ const CartProvider = ({ children }) => {
  };
  return (
   <CartContext.Provider
-   value={{ cart, setCart, addToCart, removeFromCart, clearCart, message, updateQuantity }}
+   value={{
+    cart,
+    setCart,
+    addToCart,
+    removeFromCart,
+    clearCart,
+    message,
+    setMessage,
+    updateQuantity,
+   }}
   >
    {children}
   </CartContext.Provider>

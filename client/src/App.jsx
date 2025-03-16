@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes, Link, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import {
  Homepage,
  Productpage,
@@ -9,14 +9,17 @@ import {
  Register,
  Login,
  Shipments,
+ ProductProvider,
+ CartProvider,
+ Header,
 } from "./utils";
 
 function App() {
  return (
   <div>
-   <ProductProvider>
-    <CartProvider>
-     <Router>
+   <Router>
+    <ProductProvider>
+     <CartProvider>
       <AppWithHeader />
       <Routes>
        <Route path="/" element={<Homepage />} />
@@ -28,9 +31,9 @@ function App() {
        <Route path="/orderConfirmation" element={<Login />} />
        <Route path="/orderConfirmation" element={<Shipments />} />
       </Routes>
-     </Router>
-    </CartProvider>
-   </ProductProvider>
+     </CartProvider>
+    </ProductProvider>
+   </Router>
   </div>
  );
 }

@@ -290,7 +290,17 @@ body {
  margin-bottom: 30px;
  justify-content: center;
 }
-
+.cartPage .cartMessage {
+ margin-bottom: 20px;
+ font-size: 24px;
+ font-weight: bold;
+ color: #28a745;
+ text-align: center;
+ background: rgba(40, 167, 69, 0.1);
+ padding: 10px 15px;
+ border-radius: 8px;
+ transition: opacity 0.3s ease-in-out;
+}
 .cartItem {
  background-color: #fff;
  border-radius: 12px;
@@ -338,6 +348,7 @@ body {
  background-color: #007bff;
  color: white;
  border: none;
+ margin-bottom: 10px;
  padding: 5px 12px;
  cursor: pointer;
  border-radius: 4px;
@@ -358,19 +369,25 @@ body {
 
 /* Remove button styling */
 .cartItem .removeButton {
- background-color: #ff4d4d;
- color: white;
+ background-color: #d4d4d4;
+ color: black;
  border: none;
  padding: 8px 15px;
- border-radius: 5px;
+ border-radius: 10px;
  cursor: pointer;
  font-size: 18px;
- transition: background-color 0.3s ease;
+ width: 90%;
+ transition: 0.5s ease;
+ border-bottom: 3px solid black;
+ border-top: 3px solid black;
+
  margin-top: auto;
 }
 
 .cartItem .removeButton:hover {
- background-color: #ff1a1a;
+ background-color: #ff0000dc;
+ transition: 0.5s ease;
+ color: white;
 }
 
 /* Clear cart button */

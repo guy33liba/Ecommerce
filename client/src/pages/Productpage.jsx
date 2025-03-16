@@ -9,7 +9,7 @@ const Productpage = () => {
  const [loading, setLoading] = useState(true);
  const [error, setError] = useState(null);
 
- const { addToCart, message } = useCartContext();
+ const { addToCart } = useCartContext();
 
  useEffect(() => {
   const fetchProduct = async () => {
@@ -48,7 +48,6 @@ const Productpage = () => {
        Add to Cart
       </button>
      </Link>
-     {message && <h1>Added To Cart</h1>}
     </>
    ) : (
     <h2>Product not found.</h2>
