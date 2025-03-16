@@ -5,13 +5,12 @@ import "../../src/App.css";
 const Header = () => {
  const navigate = useNavigate();
 
- // Get user authentication status (from localStorage or Context API)
- const isAuthenticated = localStorage.getItem("token"); // Assume token is stored on login
+ const isAuthenticated = localStorage.getItem("token");
 
  // Logout function
  const handleLogout = () => {
-  localStorage.removeItem("token"); // Remove token
-  navigate("/login"); // Redirect to login page
+  localStorage.removeItem("token");
+  navigate("/login");
  };
 
  return (
