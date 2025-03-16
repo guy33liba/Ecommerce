@@ -65,6 +65,9 @@ const Checkoutpage = () => {
         <div className="cartItemDiv">
          <h3>{item.name}</h3>
          <img src={item.image} alt="" />
+         <div className="cartItemDiv">
+          <p>{item.quantity}</p>
+         </div>
         </div>
         <p>${item.price.toFixed(2)}</p>
        </div>
