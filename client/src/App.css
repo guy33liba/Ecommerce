@@ -30,6 +30,7 @@
  color: white;
  text-decoration: none;
  font-size: 2rem;
+ text-decoration: underline;
  padding: 8px 12px;
  transition: 0.3s;
 }
@@ -737,4 +738,130 @@ body {
  100% {
   color: #ff33b5; /* Pink */
  }
+}
+
+/* login page */
+
+/* Wrapper for centering */
+.loginWrapper {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ height: 100vh;
+ background-color: #f4f4f4;
+}
+
+/* Container for the login box */
+.loginContainer {
+ width: 100%;
+ max-width: 380px;
+ padding: 25px;
+ background: white;
+ border-radius: 10px;
+ box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+ text-align: center;
+}
+
+/* Heading */
+h2 {
+ margin-bottom: 20px;
+ color: #333;
+}
+
+/* Input group with spacing */
+.inputGroup {
+ position: relative;
+ margin-bottom: 15px;
+}
+
+.inputGroup input {
+ width: 100%;
+ padding: 12px;
+ border: 1px solid #ccc;
+ border-radius: 5px;
+ font-size: 16px;
+ outline: none;
+}
+
+.inputGroup input:focus {
+ border-color: #007bff;
+ box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Password toggle icon */
+.passwordToggle {
+ position: absolute;
+ right: 10px;
+ top: 50%;
+ font-size: 30px;
+ transform: translateY(-40%);
+ cursor: pointer;
+ color: #555;
+}
+
+/* Remember Me and Forgot Password */
+.rememberMeContainer {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ margin-bottom: 15px;
+ font-size: 14px;
+}
+
+.rememberMeContainer label {
+ display: flex;
+ align-items: center;
+ cursor: pointer;
+}
+
+.rememberMeContainer input {
+ margin-right: 5px;
+}
+
+.forgotPassword {
+ color: #007bff;
+ text-decoration: none;
+}
+
+.forgotPassword:hover {
+ text-decoration: underline;
+}
+
+/* Login button */
+button {
+ width: 100%;
+ padding: 12px;
+ background-color: #007bff;
+ color: white;
+ font-size: 16px;
+ border: none;
+ border-radius: 5px;
+ cursor: pointer;
+ transition: background 0.3s ease;
+}
+
+button:hover {
+ background-color: #0056b3;
+}
+
+/* Register prompt */
+.registerPrompt {
+ margin-top: 15px;
+ font-size: 14px;
+}
+
+.registerPrompt a {
+ color: #007bff;
+ text-decoration: none;
+}
+
+.registerPrompt a:hover {
+ text-decoration: underline;
+}
+
+/* Error message */
+.errorMessage {
+ color: red;
+ font-size: 14px;
+ margin-bottom: 10px;
 }

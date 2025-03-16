@@ -1,11 +1,16 @@
+import { AiOutlineEye } from "react-icons/ai";
+import { AiOutlineEyeInvisible } from "react-icons/ai";
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
 
 function Login() {
  const [email, setEmail] = useState("");
  const [password, setPassword] = useState("");
  const [errorMessage, setErrorMessage] = useState("");
+ const [showPassword, setShowPassword] = useState(false);
+ const [rememberMe, setRememberMe] = useState(false);
  const navigate = useNavigate();
 
  const handleSubmit = async (e) => {
@@ -15,8 +20,13 @@ function Login() {
     email,
     password,
    });
+
    const { token } = data;
-   localStorage.setItem("token", token);
+   if (rememberMe) {
+    localStorage.setItem("token", token);
+   } else {
+    sessionStorage.setItem("token", token);
+   }
    navigate("/shipments");
   } catch (error) {
    setErrorMessage("Invalid credentials, please try again.");
@@ -25,24 +35,51 @@ function Login() {
  };
 
  return (
-  <div>
-   {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
-   <h2>Login</h2>
-   <form onSubmit={handleSubmit}>
-    <input
-     type="email"
-     placeholder="Email"
-     value={email}
-     onChange={(e) => setEmail(e.target.value)}
-    />
-    <input
-     type="password"
-     placeholder="Password"
-     value={password}
-     onChange={(e) => setPassword(e.target.value)}
-    />
-    <button type="submit">Login</button>
-   </form>
+  <div className="loginWrapper">
+   <div className="loginContainer">
+    {errorMessage && <p className="errorMessage">{errorMessage}</p>}
+    <h2>Login</h2>
+    <form onSubmit={handleSubmit}>
+     <div className="inputGroup">
+      <input
+       type="email"
+       placeholder="Email"
+       value={email}
+       onChange={(e) => setEmail(e.target.value)}
+       required
+      />
+     </div>
+
+     <div className="inputGroup">
+      <input
+       type={showPassword ? "text" : "password"}
+       placeholder="Password"
+       value={password}
+       onChange={(e) => setPassword(e.target.value)}
+       required
+      />
+      <span className="passwordToggle" onClick={() => setShowPassword(!showPassword)}>
+       {showPassword ? <FaEye /> : <FaEyeSlash />}
+      </span>
+     </div>
+
+     <div className="rememberMeContainer">
+      <label>
+       <input type="checkbox" checked={rememberMe} onChange={() => setRememberMe(!rememberMe)} />
+       Remember Me
+      </label>
+      <a href="/forgot-password" className="forgotPassword">
+       Forgot Password?
+      </a>
+     </div>
+
+     <button type="submit">Login</button>
+
+     <p className="registerPrompt">
+      Don't have an account? <a href="/register">Register here</a>
+     </p>
+    </form>
+   </div>
   </div>
  );
 }

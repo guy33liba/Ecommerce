@@ -28,8 +28,8 @@ function App() {
        <Route path="/checkout" element={<Checkoutpage />} />
        <Route path="/orderConfirmation" element={<OrderConfirmation />} />
        <Route path="/register" element={<Register />} />
-       <Route path="/orderConfirmation" element={<Login />} />
-       <Route path="/orderConfirmation" element={<Shipments />} />
+       <Route path="/login" element={<Login />} />
+       <Route path="/shipments" element={<Shipments />} />
       </Routes>
      </CartProvider>
     </ProductProvider>
