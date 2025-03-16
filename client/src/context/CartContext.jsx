@@ -61,6 +61,11 @@ const CartProvider = ({ children }) => {
    const { data } = await axios.put(`http://localhost:5000/api/cart/${id}`, { quantity });
    console.log(data);
    setCart(data);
+   const findItem = data.find((item) => id === item._id);
+   setMessage(`${findItem.name} has been added/updated in the cart!`);
+   setTimeout(() => {
+    setMessage("");
+   }, 1500);
   } catch (error) {
    console.error("Error updating cart quantity", error);
   }

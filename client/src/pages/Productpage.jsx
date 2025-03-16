@@ -9,10 +9,10 @@ const Productpage = () => {
  const [loading, setLoading] = useState(true);
  const [error, setError] = useState(null);
 
- const { addToCart } = useCartContext();
+ const { addToCart, setMessage } = useCartContext();
 
  useEffect(() => {
-  const fetchProduct = async () => {
+  const fetchProduct = async (item) => {
    try {
     const result = await axios.get(`http://localhost:5000/api/products/${id}`);
     setProduct(result.data);

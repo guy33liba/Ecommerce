@@ -4,8 +4,7 @@ import "../App.css";
 import axios from "axios";
 
 const CartPage = () => {
- const { cart, removeFromCart, clearCart, updateQuantity } = useCartContext();
- const [message, setMessage] = useState("");
+ const { cart, removeFromCart, clearCart, updateQuantity, message, setMessage } = useCartContext();
 
  const handleAddedToCartMessage = (item) => {
   setMessage(`${item.name} has been added/updated in the cart!`);

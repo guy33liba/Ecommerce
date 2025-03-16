@@ -4,7 +4,7 @@ import { useCartContext } from "../context/CartContext";
 import axios from "axios";
 
 const Checkoutpage = () => {
- const { cart, updateQuantity, removeFromCart } = useCartContext();
+ const { cart, updateQuantity, removeFromCart, message, setMessage } = useCartContext();
  const [form, setForm] = useState({
   shippingAddress: "",
   paymentMethod: "",
@@ -53,14 +53,15 @@ const Checkoutpage = () => {
  return (
   <div className="checkoutContainer">
    <h1>Checkout</h1>
-
    {/* Order Summary */}
    <div className="orderSummary">
-    <h3 style={{ marginLeft: "20px" }}>Order Summary</h3>
+    <h3 style={{ fontSize: "28px" }}>Order Summary</h3>
     {cart.length === 0 ? (
      <p>Your cart is empty.</p>
     ) : (
      <>
+      {message && <h2 className="cartMessage">{message}</h2>}
+
       {cart.map((item) => (
        <div className="cartItem" key={item._id}>
         <div className="cartItemDiv">
@@ -73,7 +74,9 @@ const Checkoutpage = () => {
          <button onClick={() => updateQuantity(item._id, item.quantity + 1)}>+</button>
         </div>
         <p>${(item.price * item.quantity).toFixed(2)}</p>
-        <button onClick={() => removeFromCart(item._id)}>Remove</button>
+        <button className="checkoutRemoveButton" onClick={() => removeFromCart(item._id)}>
+         Remove
+        </button>
        </div>
       ))}
       <h3 className="totalPrice">Total: ${total.toFixed(2)}</h3>
@@ -108,7 +111,6 @@ const Checkoutpage = () => {
       </select>
      </div>
 
-     {/* Show processing state */}
      {form.isPaymentProcessing ? (
       <div className="processing">Processing your payment...</div>
      ) : (
