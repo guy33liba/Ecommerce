@@ -4,9 +4,12 @@ const ProductContext = createContext();
 
 const ProductProvider = ({ children }) => {
  const [products, setProducts] = useState([]);
+ const [user, setUser] = useState("");
 
  return (
-  <ProductContext.Provider value={{ products, setProducts }}>{children}</ProductContext.Provider>
+  <ProductContext.Provider value={{ products, setProducts, user, setUser }}>
+   {children}
+  </ProductContext.Provider>
  );
 };
 

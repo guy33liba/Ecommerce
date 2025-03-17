@@ -2,7 +2,7 @@ import express from "express";
 import User from "../schema/userSchema.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-
+import Product from "../schema/ProductSchema.js";
 const router = express.Router();
 
 // Register User
@@ -44,7 +44,7 @@ router.post("/login", async (req, res) => {
   if (!isMatch) {
    return res.status(400).json({ message: "Invalid credentials" });
   }
-
+  console.log(user);
   // Generate a JWT token and send it back to the user
   const token = jwt.sign({ _id: user._id, name: user.name, email: user.email }, "yourJwtSecret", {
    expiresIn: "1h",
@@ -56,16 +56,17 @@ router.post("/login", async (req, res) => {
 });
 
 // Authentication Middleware
-const authenticateUser = async (req, res, next) => {
+export const authenticateUser = async (req, res, next) => {
  const token = req.header("Authorization");
  if (!token) {
   return res.status(401).json({ message: "Access Denied" });
  }
 
  try {
+  const token = req.headers.authorization?.split(" ")[1]; // Extract token
+  if (!token) return res.status(401).json({ message: "No token, authorization denied" });
   const verified = jwt.verify(token, "yourJwtSecret");
   req.user = verified;
-  consle.log(req.user);
   next();
  } catch (error) {
   res.status(400).json({ message: "Invalid Token" });
@@ -74,17 +75,11 @@ const authenticateUser = async (req, res, next) => {
 
 //get shipments
 
-// router.get("/shipments", authenticateUser, async (req, res) => {
+// router.get("/products", authenticateUser, async (req, res) => {
 //  try {
 //   const userId = req.user._id;
-//   const user = await User.findById(userId).populate("shipments");
-
-//   if (!user) {
-//    return res.status(404).json({ message: "User not found" });
-//   }
-
-//   const shipments = user.shipments;
-//   res.status(200).json({ shipments });
+//   const products = await Product.find({ user: userId });
+//   res.status(200).json({ products });
 //  } catch (error) {
 //   res.status(500).json({ message: "Server error", error });
 //  }

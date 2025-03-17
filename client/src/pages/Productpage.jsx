@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useCartContext } from "../context/CartContext";
+import { useProductContext } from "../context/Productcontext";
 
 const Productpage = () => {
  const { id } = useParams(); // ✅ Get product ID from URL
@@ -10,17 +11,19 @@ const Productpage = () => {
  const [error, setError] = useState(null);
 
  const { addToCart, setMessage } = useCartContext();
-
+ const { user } = useProductContext();
  useEffect(() => {
   const fetchProduct = async (item) => {
-   try {
-    const result = await axios.get(`http://localhost:5000/api/products/${id}`);
-    setProduct(result.data);
-   } catch (err) {
-    console.error("Error fetching product:", err);
-    setError("Failed to load product. Please try again later.");
-   } finally {
-    setLoading(false);
+   if (user) {
+    try {
+     const result = await axios.get(`http://localhost:5000/api/products/${id}`);
+     setProduct(result.data);
+    } catch (err) {
+     console.error("Error fetching product:", err);
+     setError("Failed to load product. Please try again later.");
+    } finally {
+     setLoading(false);
+    }
    }
   };
 

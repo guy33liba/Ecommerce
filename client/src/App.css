@@ -6,6 +6,22 @@
  box-sizing: border-box;
  font-family: Arial, sans-serif;
 }
+/* home page container  */
+
+.homePageContainer {
+ text-align: center;
+}
+
+.homePageContainer.userGreeting {
+ font-size: 1.5rem;
+ position: relative;
+ font-weight: bold;
+ color: #4a90e2;
+}
+
+.homePageContainer .userGreeting span {
+ color: #ff5722;
+}
 
 /* Header Container */
 .headerContainer {

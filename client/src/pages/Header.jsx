@@ -1,16 +1,21 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../src/App.css";
+import { useProductContext } from "../context/Productcontext";
+import { useCartContext } from "../context/CartContext";
 
 const Header = () => {
  const navigate = useNavigate();
-
+ const { setUser } = useProductContext();
+ const { setCart } = useCartContext();
  const isAuthenticated = localStorage.getItem("token");
 
  // Logout function
  const handleLogout = () => {
   localStorage.removeItem("token");
   navigate("/login");
+  setUser("");
+  setCart([]);
  };
 
  return (

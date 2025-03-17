@@ -1,24 +1,63 @@
 import express from "express";
 import Cart from "../schema/CartSchema.js"; // Adjust this path as needed
 import Product from "../schema/ProductSchema.js"; // Adjust path as needed
-
+import { authenticateUser } from "./authenticationRoute.js";
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+// router.post("/", async (req, res) => {
+//  try {
+//   const { productId, quantity } = req.body;
+//   const userId = req.user._id;
+
+//   const product = await Product.findById(productId);
+//   if (!product) {
+//    return res.status(404).json({ message: "Product not found" });
+//   }
+
+//   let cartItem = await Cart.findOne({ userId, productId });
+
+//   if (cartItem) {
+//    cartItem.quantity += quantity;
+//   } else {
+//    cartItem = new Cart({
+//     userId,
+//     productId,
+//     quantity,
+//     name: product.name,
+//     price: product.price,
+//     image: product.image,
+//    });
+//   }
+
+//   await cartItem.save();
+
+//   const allCartItems = await Cart.find();
+//   res.status(201).json(allCartItems);
+//  } catch (error) {
+//   console.error("Error adding item to cart:", error);
+//   res.status(500).json({ message: "Failed to add item to cart" });
+//  }
+// });
+
+// all products and the belong to the user
+
+router.post("/", authenticateUser, async (req, res) => {
  try {
   const { productId, quantity } = req.body;
+  const userId = req.user._id; // Get user ID from authentication
 
   const product = await Product.findById(productId);
   if (!product) {
    return res.status(404).json({ message: "Product not found" });
   }
 
-  let cartItem = await Cart.findOne({ productId });
+  let cartItem = await Cart.findOne({ userId, productId });
 
   if (cartItem) {
    cartItem.quantity += quantity;
   } else {
    cartItem = new Cart({
+    userId, // Associate the item with the user
     productId,
     quantity,
     name: product.name,
@@ -28,8 +67,8 @@ router.post("/", async (req, res) => {
   }
 
   await cartItem.save();
-  const allCartItems = await Cart.find();
-  res.status(201).json(allCartItems);
+  const userCart = await Cart.find({ userId }).populate("productId");
+  res.status(201).json(userCart);
  } catch (error) {
   console.error("Error adding item to cart:", error);
   res.status(500).json({ message: "Failed to add item to cart" });
@@ -38,11 +77,13 @@ router.post("/", async (req, res) => {
 
 //
 
-router.get("/", async (req, res) => {
+router.get("/", authenticateUser, async (req, res) => {
  try {
-  const cartItems = await Cart.find().populate("productId");
+  const userId = req.user._id;
+  const cartItems = await Cart.find({ userId }).populate("productId");
   res.status(200).json(cartItems);
  } catch (error) {
+  console.error("Error fetching cart Items:", error);
   res.status(500).json({ message: "Error fetching cart items", error });
  }
 });
