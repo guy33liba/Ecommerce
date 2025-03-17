@@ -88,23 +88,27 @@ router.get("/", authenticateUser, async (req, res) => {
  }
 });
 
-//
+//upd
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", authenticateUser, async (req, res) => {
  try {
   const { quantity } = req.body;
   const { id } = req.params;
+  const userId = req.user._id;
 
-  const cartItem = await Cart.findById(id);
+  // Find the cart item
+  const cartItem = await Cart.findOne({ _id: id, userId });
   if (!cartItem) {
    return res.status(404).json({ message: "Cart item not found" });
   }
 
+  // Update the quantity
   cartItem.quantity = quantity;
   await cartItem.save();
 
-  const cartUpdated = await Cart.find(); // Fetch updated cart items
-  res.status(200).json(cartUpdated);
+  // Fetch updated cart items for the user
+  const userCart = await Cart.find({ userId }).populate("productId");
+  res.status(200).json(userCart);
  } catch (error) {
   console.error("Error updating cart item:", error);
   res.status(500).json({ message: "Error updating cart item", error: error.message });
@@ -116,7 +120,11 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
  try {
   const { id } = req.params;
-  await Cart.findByIdAndDelete(id);
+  if (!cartItem) {
+   console.log("not found cartitems");
+   return res.status(404).json({ message: "Cart item not found" });
+  }
+  await Cart.findByIdAndDelete({ id, userId });
   const updatedCart = await Cart.find();
   res.status(200).json(updatedCart);
  } catch (error) {
@@ -127,10 +135,12 @@ router.delete("/:id", async (req, res) => {
 
 //
 
-router.delete("/", async (req, res) => {
+router.delete("/", authenticateUser, async (req, res) => {
  try {
-  await Cart.deleteMany({});
-  const updatedCart = await Cart.find();
+  const userId = req.user._id;
+
+  const updatedCart = await Cart.deleteMany({ userId });
+
   res.status(200).json(updatedCart);
  } catch (error) {
   console.error("Error deleting cart");
