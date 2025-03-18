@@ -7,6 +7,8 @@ const Homepage = () => {
 
  return (
   <div className="homePageContainer">
+   <img src="/images/sea.png" className="seaBackground" />
+
    <header className="welcomeHeader">
     <h1>Welcome to the Store</h1>
     {user && (

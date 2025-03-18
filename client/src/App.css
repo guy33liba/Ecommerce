@@ -6,23 +6,24 @@
  box-sizing: border-box;
  font-family: Arial, sans-serif;
 }
+body {
+ font-family: "Roboto", sans-serif;
+ background-color: #f8f8f8;
+ color: #333;
+ line-height: 1.6;
+ overflow-x: hidden;
+}
+
 /* home page container  */
 
-.homePageContainer {
- text-align: center;
+.seaBackground {
+ position: absolute;
+ height: 150vh;
+ width: 100vw;
+ z-index: -1;
+ left: 0;
+ top: 0;
 }
-
-.homePageContainer.userGreeting {
- font-size: 1.5rem;
- position: relative;
- font-weight: bold;
- color: #4a90e2;
-}
-
-.homePageContainer .userGreeting span {
- color: #ff5722;
-}
-
 /* Header Container */
 .headerContainer {
  background-color: #222;
@@ -63,20 +64,20 @@
 
 /* homepage */
 
-.homePageContainer {
- text-align: center;
- padding: 20px;
- margin-top: 20px;
- background-color: #f8f9fa;
- min-height: 100vh;
-}
-
 .homePageContainer h1 {
  font-size: 2rem;
  color: #333;
- margin-bottom: 20px;
+ margin-bottom: 5px;
 }
 
+.homePageContainer {
+ text-align: center;
+}
+
+.homePageContainer .userGreeting span {
+ color: #ff6106;
+ font-size: 30px;
+}
 .productCard {
  background: white;
  padding: 15px;
@@ -115,29 +116,7 @@
  background-color: #0056b3;
 }
 
-/* product list page */
-
-* {
- margin: 0;
- padding: 0;
- box-sizing: border-box;
-}
-
-body {
- font-family: "Roboto", sans-serif;
- background-color: #f8f8f8;
- color: #333;
- line-height: 1.6;
-}
-
 /* Product List Page */
-.productListContainer {
- text-align: center;
- padding: 40px 20px;
- background-color: #fafafa;
- min-height: 100vh;
-}
-
 .productListContainer h1 {
  font-size: 2.5rem;
  color: #444;
@@ -150,9 +129,12 @@ body {
 .productList {
  display: grid;
  grid-template-columns: repeat(5, 1fr);
- gap: 30px;
+ gap: 20px;
  justify-items: center;
- padding: 20px;
+ overflow-y: auto;
+ height: 100%;
+ width: 100%;
+ padding: 40px;
 }
 
 @media (max-width: 768px) {
@@ -408,7 +390,6 @@ body {
  transition: 0.5s;
 }
 
-/* Remove button styling */
 .cartItem .removeButton {
  background-color: #d4d4d4;
  color: black;
@@ -448,7 +429,6 @@ body {
  background-color: #0056b3;
 }
 
-/* Empty cart message */
 .emptyCartMessage {
  font-size: 1.2rem;
  color: #555;
@@ -782,7 +762,6 @@ body {
 
 /* Heading */
 h2 {
- margin-bottom: 20px;
  color: #333;
 }
 
@@ -908,7 +887,7 @@ button:hover {
 
 /* Heading */
 h2 {
- margin-bottom: 20px;
+ margin-bottom: 5px;
  color: #333;
 }
 

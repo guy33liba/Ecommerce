@@ -37,7 +37,6 @@ const Productlist = () => {
  return (
   <div className="productListConteiner">
    <h1>Product Catalog</h1>
-
    {/* Display logged-in user's name */}
 
    <div className="productList">
