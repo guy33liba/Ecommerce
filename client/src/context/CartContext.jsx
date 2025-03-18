@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 // ✅ Create the context
@@ -10,10 +10,28 @@ const CartProvider = ({ children }) => {
  const [cart, setCart] = useState([]);
  const [message, setMessage] = useState("");
 
+ const getAuthToken = () => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+   console.error("No token found in localStorage.");
+   // Handle the case where the user needs to log in
+   return null;
+  }
+  return token;
+ };
+ const axiosInstance = axios.create({
+  baseURL: "http://localhost:5000/api",
+  headers: {
+   Authorization: `Bearer ${getAuthToken()}`, // Ensure token is included
+  },
+ });
+
+ // Check for token validity before making requests
+
  useEffect(() => {
   const fetchCart = async () => {
    try {
-    const response = await axios.get(`http://localhost:5000/api/cart`);
+    const response = await axiosInstance.get(`/cart`);
     setCart(response.data);
    } catch (error) {
     console.error("Error fetching Cart:", error.message);
@@ -26,7 +44,7 @@ const CartProvider = ({ children }) => {
   try {
    console.log("Adding to cart:", { productId: item?._id });
 
-   const { data } = await axios.post("http://localhost:5000/api/cart", {
+   const { data } = await axiosInstance.post("/cart", {
     productId: item?._id,
     quantity: 1,
    });
@@ -41,7 +59,7 @@ const CartProvider = ({ children }) => {
 
  const removeFromCart = async (id) => {
   try {
-   const { data } = await axios.delete(`http://localhost:5000/api/cart/${id}`);
+   const { data } = await axiosInstance.delete(`/cart/${id}`);
    setCart([...data]);
   } catch (error) {
    console.error("Error removing item:", error.message);
@@ -50,7 +68,7 @@ const CartProvider = ({ children }) => {
 
  const clearCart = async () => {
   try {
-   await axios.delete(`http://localhost:5000/api/cart`);
+   await axiosInstance.delete(`/cart`);
    setCart([]);
   } catch (error) {
    console.error("Error clearing cart:", error.message);
@@ -58,7 +76,7 @@ const CartProvider = ({ children }) => {
  };
  const updateQuantity = async (id, quantity) => {
   try {
-   const { data } = await axios.put(`http://localhost:5000/api/cart/${id}`, { quantity });
+   const { data } = await axiosInstance.put(`/cart/${id}`, { quantity });
    console.log(data);
    setCart(data);
    const findItem = data.find((item) => id === item._id);
@@ -67,7 +85,7 @@ const CartProvider = ({ children }) => {
     setMessage("");
    }, 1500);
   } catch (error) {
-   console.error("Error updating cart quantity", error);
+   console.error("Error updating cart quantity", error.message);
   }
  };
  return (

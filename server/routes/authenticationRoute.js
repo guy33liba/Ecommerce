@@ -3,6 +3,10 @@ import User from "../schema/userSchema.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import Product from "../schema/ProductSchema.js";
+import dotenv from "dotenv";
+
+dotenv.config();
+
 const router = express.Router();
 
 // Register User
@@ -46,9 +50,13 @@ router.post("/login", async (req, res) => {
   }
   console.log(user);
   // Generate a JWT token and send it back to the user
-  const token = jwt.sign({ _id: user._id, name: user.name, email: user.email }, "yourJwtSecret", {
-   expiresIn: "1h",
-  });
+  const token = jwt.sign(
+   { _id: user._id, name: user.name, email: user.email },
+   process.env.JWT_SECRET,
+   {
+    expiresIn: "1h",
+   }
+  );
   res.status(200).json({ token, user: { name: user.name, email: user.email } });
  } catch (error) {
   res.status(500).json({ message: "Server error", error });
@@ -56,20 +64,24 @@ router.post("/login", async (req, res) => {
 });
 
 // Authentication Middleware
+
 export const authenticateUser = async (req, res, next) => {
- const token = req.header("Authorization");
+ const token = req.headers["authorization"]?.split(" ")[1]; // Bearer <token>
  if (!token) {
-  return res.status(401).json({ message: "Access Denied" });
+  return res.status(401).json({ message: "No token provided" });
  }
 
  try {
-  const token = req.headers.authorization?.split(" ")[1]; // Extract token
-  if (!token) return res.status(401).json({ message: "No token, authorization denied" });
-  const verified = jwt.verify(token, "yourJwtSecret");
-  req.user = verified;
+  const decoded = jwt.verify(token, process.env.JWT_SECRET); // Ensure you have a valid secret
+  const user = await User.findById(decoded._id);
+  if (!user) {
+   return res.status(404).json({ message: "User not found" });
+  }
+
+  req.user = user; // Attach user info to the request
   next();
  } catch (error) {
-  res.status(400).json({ message: "Invalid Token" });
+  return res.status(401).json({ message: "Invalid token" });
  }
 };
 

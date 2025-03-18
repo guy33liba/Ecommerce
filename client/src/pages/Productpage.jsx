@@ -13,7 +13,7 @@ const Productpage = () => {
  const { addToCart, setMessage } = useCartContext();
  const { user } = useProductContext();
  useEffect(() => {
-  const fetchProduct = async (item) => {
+  const fetchProduct = async () => {
    if (user) {
     try {
      const result = await axios.get(`http://localhost:5000/api/products/${id}`);
