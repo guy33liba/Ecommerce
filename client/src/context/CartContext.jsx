@@ -60,6 +60,7 @@ const CartProvider = ({ children }) => {
  const removeFromCart = async (id) => {
   try {
    const { data } = await axiosInstance.delete(`/cart/${id}`);
+   console.log("remove fuck", id);
    setCart([...data]);
   } catch (error) {
    console.error("Error removing item:", error.message);

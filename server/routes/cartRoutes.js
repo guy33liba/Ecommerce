@@ -83,10 +83,11 @@ router.put("/:id", authenticateUser, async (req, res) => {
 router.delete("/:id", authenticateUser, async (req, res) => {
  try {
   const { id } = req.params;
-  const userId = req.user._id;
+  const userId = req.user._id; // Access the userId from req.user set in the middleware
 
-  // Find and delete the cart item
-  const cartItem = await Cart.findOneAndDelete({ _id: id, user: userId });
+  // Delete the cart item by matching both userId and cart item ID
+  const cartItem = await Cart.findOneAndDelete({ _id: id, userId });
+
   if (!cartItem) {
    return res.status(404).json({ message: "Cart item not found" });
   }
