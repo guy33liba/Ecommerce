@@ -1,10 +1,10 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import Product from "./schema/ProductSchema.js";
+import { products } from "./listofproducts.js";
 import productRoutes from "./routes/productRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
-import { products } from "./listofproducts.js";
-import Product from "./schema/ProductSchema.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import userRoutes from "./routes/authenticationRoute.js";
 
