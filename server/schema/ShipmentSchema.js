@@ -2,15 +2,15 @@ import mongoose from "mongoose";
 
 const shipmentSchema = new mongoose.Schema(
  {
+  userId: {
+   type: mongoose.Schema.Types.ObjectId,
+   ref: "User",
+   required: true,
+  },
   shipmentId: {
    type: String,
    required: true,
    unique: true,
-  },
-  userId: {
-   type: String,
-   ref: "User",
-   required: true,
   },
   address: String,
   status: {

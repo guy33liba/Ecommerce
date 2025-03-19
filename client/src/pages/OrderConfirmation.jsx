@@ -11,17 +11,22 @@ const OrderConfirmation = () => {
  //
 
  useEffect(() => {
-  const fetchOrderDetails = async () => {
+  const fetchAllOrders = async () => {
    try {
-    const { data } = await axios.get("http://localhost:5000/api/orders/latest");
+    const { data } = await axios.get("http://localhost:5000/api/orders/all"); // Fetch all orders
+    console.log("API Response:", data);
     setOrderDetails(data);
-    console.log(data);
+
+    // Flatten the shipments and update the state
+    const allShipments = data.flatMap((order) => order.shipments); // Flatten the shipments array
+    setShipments(allShipments);
    } catch (error) {
-    console.error("Error fetching order details:", error);
-    alert("Error fetching order details.");
+    console.error("Error fetching all orders and shipments:", error);
+    setError("Error fetching orders and shipment details.");
    }
   };
-  fetchOrderDetails();
+
+  fetchAllOrders();
  }, []);
 
  //

@@ -4,7 +4,8 @@ import { useCartContext } from "../context/CartContext";
 import axios from "axios";
 
 const Checkoutpage = () => {
- const { cart, updateQuantity, removeFromCart, message, setMessage } = useCartContext();
+ const { cart, updateQuantity, removeFromCart, message, shipments, setShipments } =
+  useCartContext();
  const [form, setForm] = useState({
   shippingAddress: "",
   paymentMethod: "",
@@ -42,6 +43,7 @@ const Checkoutpage = () => {
    } else {
     alert("Payment failed. Please try again.");
    }
+   setShipments(response?.data);
   } catch (error) {
    console.error("Payment Error:", error);
    alert("Payment Failed. Please try again.");

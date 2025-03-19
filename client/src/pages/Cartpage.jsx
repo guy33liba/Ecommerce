@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../App.css";
 import axios from "axios";
-import { useCartContext } from "../context/Cartcontext";
+import { useCartContext } from "../context/CartContext";
 
 const CartPage = () => {
  const { cart, removeFromCart, clearCart, updateQuantity, message, setMessage } = useCartContext();

@@ -8,13 +8,13 @@ const CartContext = createContext();
 // ✅ Provider component
 const CartProvider = ({ children }) => {
  const [cart, setCart] = useState([]);
+ const [shipments, setShipments] = useState([]);
  const [message, setMessage] = useState("");
 
  const getAuthToken = () => {
   const token = localStorage.getItem("token");
   if (!token) {
    console.error("No token found in localStorage.");
-   // Handle the case where the user needs to log in
    return null;
   }
   return token;
@@ -22,11 +22,9 @@ const CartProvider = ({ children }) => {
  const axiosInstance = axios.create({
   baseURL: "http://localhost:5000/api",
   headers: {
-   Authorization: `Bearer ${getAuthToken()}`, // Ensure token is included
+   Authorization: `Bearer ${getAuthToken()}`,
   },
  });
-
- // Check for token validity before making requests
 
  useEffect(() => {
   const fetchCart = async () => {
@@ -100,6 +98,8 @@ const CartProvider = ({ children }) => {
     message,
     setMessage,
     updateQuantity,
+    shipments,
+    setShipments,
    }}
   >
    {children}

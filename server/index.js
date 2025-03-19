@@ -7,6 +7,7 @@ import productRoutes from "./routes/productRoutes.js";
 import cartRoutes from "./routes/cartRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import userRoutes from "./routes/authenticationRoute.js";
+import shipmentRoutes from "./routes/shipmentRoutes.js";
 
 const mongoUri =
  "mongodb+srv://guyliba:guyliba33@e-commerce.wx8mm.mongodb.net/?retryWrites=true&w=majority&appName=e-commerce";
@@ -15,7 +16,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({ origin: "*" }));
-
+debugger;
 mongoose
  .connect(mongoUri)
  .then(async () => {
@@ -33,5 +34,6 @@ app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/users", shipmentRoutes);
 
 app.listen(5000, console.log("on 5000 port"));

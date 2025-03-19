@@ -1,51 +1,60 @@
-import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import { useCartContext } from "../context/CartContext";
 
-function Shipments() {
- const [shipments, setShipments] = useState([]);
-
- const token = localStorage.getItem("token");
+const ShipmentHistory = () => {
+ const { shipments, setShipments } = useCartContext();
+ const [orderDetails, setOrderDetails] = useState(null);
+ const [error, setError] = useState(null);
 
  useEffect(() => {
-  const fetchShipments = async () => {
-   if (!token) {
-    console.error("Token is missing.");
-    return;
-   }
-
+  const fetchOrderAndShipments = async () => {
    try {
-    const { data } = await axios.get("http://localhost:5000/api/users/shipments", {
-     headers: { Authorization: `Bearer ${token}` },
+    const { data } = await axios.get("http://localhost:5000/api/orders/all");
+    console.log("API Response:", data); // Verify the response structure
+
+    // Set order details (orders array)
+    setOrderDetails(data);
+
+    // Flatten and set shipments to the context state
+    const allShipments = data.flatMap((order) => {
+     return Array.isArray(order.shipmentDetails) ? order.shipmentDetails : [];
     });
 
-    setShipments(data.shipments);
+    console.log("Flattened Shipments:", allShipments); // Verify flattened shipments
+    setShipments(allShipments); // Set the flattened shipments in context state
    } catch (error) {
-    console.error("Error fetching shipments:", error.response?.data || error.message);
+    console.error("Error fetching order or shipment details:", error);
+    setError("Error fetching order or shipment details.");
    }
   };
 
-  fetchShipments();
- }, [token]);
+  fetchOrderAndShipments();
+ }, [setShipments]);
 
  return (
-  <div>
+  <div className="orderDetailsContainer">
    <h2>Your Shipments</h2>
-   <ul>
-    {shipments.length === 0 ? (
-     <p>No shipments available.</p>
-    ) : (
-     shipments.map((shipment) => (
-      <li key={shipment.shipmentId}>
-       <h3>{shipment.status}</h3>
-       <p>Address: {shipment.address}</p>
-       <p>Tracking Number: {shipment.trackingNumber}</p>
-       <p>Date Shipped: {shipment.dateShipped}</p>
-      </li>
-     ))
-    )}
-   </ul>
+   {error && <p style={{ color: "red" }}>{error}</p>}
+
+   {orderDetails ? (
+    <div>
+     {orderDetails.map((order) => (
+      <div key={order.orderId} className="orderDetails">
+       <h3>Order ID: {order.orderId}</h3>
+       <p>Shipping Address: {order.shippingAddress}</p>
+       <p>Payment Method: {order.paymentMethod}</p>
+       <h3>Total: ${order.total}</h3>
+
+       {/* Display the shipment details for this order */}
+      </div>
+     ))}
+    </div>
+   ) : (
+    <p>Loading your order details...</p>
+   )}
   </div>
  );
-}
+};
 
-export default Shipments;
+export default ShipmentHistory;

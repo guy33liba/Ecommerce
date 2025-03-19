@@ -1,5 +1,6 @@
 import express from "express";
 import Order from "../schema/OrderSchema.js";
+import Shipment from "../schema/ShipmentSchema.js";
 const router = express.Router();
 
 router.post("/", async (req, res) => {
@@ -33,8 +34,6 @@ router.post("/", async (req, res) => {
    total,
   });
 
-  console.log(newOrder); // Debugging: Log the order
-
   await newOrder.save();
 
   res.status(200).json({
@@ -47,12 +46,26 @@ router.post("/", async (req, res) => {
  }
 });
 
-router.get("/latest", async (req, res) => {
+router.get("/all", async (req, res) => {
  try {
-  const latestOrder = await Order.findOne().sort({ createdAt: -1 }).limit(1);
-  res.status(200).json(latestOrder);
+  const orders = await Order.find(); // Fetch all orders
+  const allShipments = [];
+
+  // Fetch shipments for each order
+  for (let order of orders) {
+   const shipments = await Shipment.find({ orderId: order._id });
+   allShipments.push({
+    orderId: order._id,
+    shippingAddress: order.shippingAddress,
+    paymentMethod: order.paymentMethod,
+    total: order.total,
+    shipmentDetails: shipments,
+   });
+  }
+
+  res.status(200).json(allShipments);
  } catch (error) {
-  console.error("Error Fetching order:", error);
+  console.error("Error Fetching orders or shipments:", error);
   res.status(500).json({ message: "Internal Server Error" });
  }
 });

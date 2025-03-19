@@ -31,6 +31,9 @@ const Header = () => {
      <li>
       <Link to="/checkout">Checkout</Link>
      </li>
+     <li>
+      <Link to="/shipments">Shipments</Link>
+     </li>
 
      {isAuthenticated ? (
       <li>

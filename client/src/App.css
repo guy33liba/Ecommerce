@@ -75,7 +75,7 @@ body {
 }
 
 .homePageContainer .userGreeting span {
- color: #ff6106;
+ color: #ff640a;
  font-size: 30px;
 }
 .productCard {
@@ -963,4 +963,89 @@ button:hover {
 }
 .registerPasswordToggle {
  transform: translateY(34%);
+}
+
+/* shipments page */
+
+.orderDetailsContainer {
+ max-width: 1200px;
+ margin: 20px auto;
+ padding: 20px;
+ background-color: #fff;
+ border-radius: 8px;
+ border: 2px solid #ecf0f1;
+ box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+ font-family: Arial, sans-serif;
+ gap: 20px;
+}
+
+.orderDetails {
+ background-color: #f9f9f9;
+ border-radius: 8px;
+ padding: 20px;
+ border: 2px solid #ecf0f1;
+ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+ margin-bottom: 20px;
+}
+
+.orderDetails h3 {
+ font-size: 1.6rem;
+ color: #2980b9;
+ margin-bottom: 10px;
+ font-weight: bold;
+}
+
+.orderDetails p {
+ font-size: 1rem;
+ color: #555;
+ margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+ .orderDetails {
+  width: 100%; /* Stacks them in one column on smaller screens */
+ }
+}
+
+.orderDetails ul li p {
+ color: #e74c3c;
+ font-weight: bold;
+ font-size: 1rem;
+}
+
+.errorMessage {
+ color: red;
+ font-size: 1.1rem;
+ text-align: center;
+ margin-bottom: 20px;
+}
+
+.loading {
+ text-align: center;
+ font-size: 1.2rem;
+ color: #f39c12;
+ font-weight: bold;
+}
+
+@media (max-width: 768px) {
+ .orderDetailsContainer {
+  padding: 15px;
+ }
+
+ .orderDetailsContainer h2 {
+  font-size: 1.5rem;
+ }
+
+ .orderDetails {
+  padding: 15px;
+  width: 100%;
+ }
+
+ .orderDetails h3 {
+  font-size: 1.3rem;
+ }
+
+ .orderDetails p {
+  font-size: 0.9rem;
+ }
 }
