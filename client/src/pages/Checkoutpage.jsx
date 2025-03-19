@@ -53,11 +53,11 @@ const Checkoutpage = () => {
  return (
   <div className="checkoutContainer">
    <h1>Checkout</h1>
-   {/* Order Summary */}
+   <img src="/images/airplane.png" className="airplaneImage" />
    <div className="orderSummary">
     <h3 style={{ fontSize: "28px" }}>Order Summary</h3>
     {cart.length === 0 ? (
-     <p>Your cart is empty.</p>
+     <h2 style={{ paddingLeft: "20px" }}>Your cart is empty.</h2>
     ) : (
      <>
       {message && <h4 className="checkoutCartMessage">{message}</h4>}

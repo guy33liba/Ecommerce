@@ -412,7 +412,6 @@ body {
  color: white;
 }
 
-/* Clear cart button */
 .clearCartButton {
  background-color: #007bff;
  color: white;
@@ -441,7 +440,6 @@ body {
 
 .checkoutContainer {
  font-family: Arial, sans-serif;
- background-color: #f3f3f3;
  min-height: 100vh;
  margin-left: 10%;
 }
@@ -503,6 +501,13 @@ body {
 .checkoutContainer .cartItem img {
  height: 80px;
 }
+.cartItemDetails {
+ width: 300px;
+}
+.cartItemDetails button {
+ width: 60px;
+}
+
 .cartItemDiv {
  align-items: center;
  margin-top: 20px;
@@ -530,7 +535,6 @@ body {
  align-content: center;
 }
 
-/* Total Price */
 .checkoutContainer .totalPrice {
  font-size: 1.4rem;
  font-weight: bold;
@@ -571,7 +575,6 @@ body {
  font-size: 1rem;
 }
 
-/* Checkout Button */
 .checkoutButton {
  width: 100%;
  padding: 12px;
@@ -587,6 +590,15 @@ body {
 
 .checkoutButton:hover {
  background-color: #e68a00;
+}
+
+.airplaneImage {
+ position: absolute;
+ left: 0;
+ top: 0;
+ width: 100vw;
+ height: 100vh;
+ z-index: -1;
 }
 
 /* Processing Payment */

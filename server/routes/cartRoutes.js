@@ -9,7 +9,7 @@ const router = express.Router();
 router.post("/", authenticateUser, async (req, res) => {
  try {
   const { productId, quantity } = req.body;
-  const userId = req.user._id; // Get user ID from authentication
+  const userId = req.user.id; // Get user ID from authentication
 
   const product = await Product.findById(productId);
   if (!product) {
@@ -44,8 +44,10 @@ router.post("/", authenticateUser, async (req, res) => {
 // Get all cart items for a user
 router.get("/", authenticateUser, async (req, res) => {
  try {
-  const userId = req.user._id;
-  const cartItems = await Cart.find({ user: userId }).populate("productId");
+  const userId = req.user.id;
+  console.log({ userId });
+  const cartItems = await Cart.find({ userId: userId }).populate("productId");
+  console.log({ cartItems });
   res.status(200).json(cartItems);
  } catch (error) {
   console.error("Error fetching cart items:", error);
