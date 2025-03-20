@@ -1,7 +1,6 @@
 [build]
-  base = "client"                          # Set the base directory to the client folder
-  command = "npm install && npm run build" # Ensure dependencies are installed before building
-  publish = "dist"                         # Path to the build output folder
+  command = "npm install --prefix client && npm run build --prefix client" # Explicitly install and build in the client folder
+  publish = "client/dist"                                                 # Path to the build output folder
 
 [[redirects]]
   from = "/*"
