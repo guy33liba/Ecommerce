@@ -17,6 +17,7 @@ const OrderConfirmation = () => {
     console.log("API Response:", data);
     if (Array.isArray(data)) {
      setOrderDetails(data[0]);
+     console.log(orderDetails);
     } else {
      setOrderDetails(data);
     }
@@ -46,6 +47,7 @@ const OrderConfirmation = () => {
     <h3>Order ID: {orderDetails.id}</h3>
     <h4>Shipping Address: {orderDetails.shippingAddress}</h4>
     <h4>Payment Method: {orderDetails.paymentMethod}</h4>
+    <h4>Order Date: {orderDetails.createdAt}</h4>
 
     <h3>Order Summary:</h3>
     {cart.length === 0 ? (
@@ -57,6 +59,7 @@ const OrderConfirmation = () => {
         <div className="orderConfirmationCartItemDiv">
          <h3>{item.name}</h3>
          <img src={item.image} alt={item.name} />
+         <h4>Quantity: {item.quantity}</h4>
         </div>
         <p>${item.price.toFixed(2)}</p>
        </div>

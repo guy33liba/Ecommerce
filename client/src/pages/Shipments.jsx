@@ -44,7 +44,22 @@ const ShipmentHistory = () => {
        <h3>Order ID: {order.orderId}</h3>
        <p>Shipping Address: {order.shippingAddress}</p>
        <p>Payment Method: {order.paymentMethod}</p>
-       <h3>Total: ${order.total}</h3>
+       <p>
+        {order.items.map((item) => (
+         <div className="orderItemsDetails">
+          <span className="name">
+           <h2>Product:</h2>
+           {item.name}
+          </span>
+          <span>
+           <img src={item.image} alt="hello" />
+          </span>
+          <span>price : ${item.price}</span>
+          <span>Quantity : {item.quantity}</span>
+         </div>
+        ))}
+       </p>
+       <h3 className="total">Total: ${order.total}</h3>
 
        {/* Display the shipment details for this order */}
       </div>

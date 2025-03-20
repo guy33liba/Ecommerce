@@ -20,6 +20,17 @@ const shipmentSchema = new mongoose.Schema(
   trackingNumber: String,
   dateShipped: Date,
   dateDelivered: Date,
+  item: [
+   {
+    name: String,
+    price: Number,
+    image: String,
+    quantity: Number,
+   },
+  ],
+  total: { type: Number, required: true },
+  status: { type: String, default: "pending" },
+  createAt: { type: Date, defualt: Date.now },
  },
  { timestamps: true }
 );

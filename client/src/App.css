@@ -690,7 +690,11 @@ body {
  width: 200px;
  color: #333;
 }
-
+.orderConfirmationCartItemDiv h4 {
+ margin-left: 100px;
+ border-bottom: 3px solid black;
+ border-radius: 10px;
+}
 /* Price Formatting */
 .orderConfirmationCartItem p {
  font-size: 16px;
@@ -749,10 +753,37 @@ body {
   color: #ff33b5; /* Pink */
  }
 }
+.orderItemsDetails {
+ border: 1px solid grey;
+ border-radius: 20px;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ padding-left: 20px;
+ margin-top: 10px;
+ height: 140px;
+ background-color: #05050525;
+ transition: 0.5s;
+ padding-right: 30px;
+}
+.orderItemsDetails img {
+ width: 120px;
+ height: 100px;
+ display: flex;
+ position: relative;
+ border-radius: 20px;
+}
+.orderItemsDetails .name {
+ width: 200px;
+}
+.orderItemsDetails:hover {
+ background-color: #6847472f;
+ transform: scale(1.01);
+ transition: 0.5s;
+}
 
 /* login page */
 
-/* Wrapper for centering */
 .loginWrapper {
  display: flex;
  justify-content: center;
@@ -991,8 +1022,14 @@ button:hover {
 .orderDetails h3 {
  font-size: 1.6rem;
  color: #2980b9;
- margin-bottom: 10px;
  font-weight: bold;
+}
+.orderDetails .total {
+ font-size: 1.6rem;
+ color: #2980b9;
+ font-weight: bold;
+ text-align: start;
+ padding-left: 5px;
 }
 
 .orderDetails p {

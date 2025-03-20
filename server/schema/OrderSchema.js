@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const OrderSchema = new mongoose.Schema({
  shippingAddress: { type: String, required: true },
  paymentMethod: { type: String, reuqired: true },
- item: [
+ items: [
   {
    name: String,
    price: Number,

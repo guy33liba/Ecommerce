@@ -35,7 +35,6 @@ router.post("/", async (req, res) => {
   });
 
   await newOrder.save();
-  debugger;
   res.status(200).json({
    message: "Order placed Successfully",
    order: newOrder,
@@ -58,11 +57,12 @@ router.get("/all", async (req, res) => {
     orderId: order._id,
     shippingAddress: order.shippingAddress,
     paymentMethod: order.paymentMethod,
+    items: order.items, // Make sure items are included
     total: order.total,
+    createdAt: order.createAt, // Include createdAt
     shipmentDetails: shipments,
    });
   }
-  console.log(allShipments.total);
   res.status(200).json(allShipments);
  } catch (error) {
   console.error("Error Fetching orders or shipments:", error);
