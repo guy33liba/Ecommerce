@@ -1,6 +1,6 @@
 [build]
   base = "client"                          # Set the base directory to the client folder
-  command = "npm run build"                # Build command for the client folder
+  command = "npm install && npm run build" # Ensure dependencies are installed before building
   publish = "dist"                         # Path to the build output folder
 
 [[redirects]]
