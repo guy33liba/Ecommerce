@@ -1,9 +1,6 @@
 [build]
-  command = "npm run build --prefix client" # Adjusted for the client folder
-  publish = "client/dist"                  # Adjusted for the client folder
-
-[dev]
-  framework = "react"       # Replace with your framework (e.g., react, vue, etc.)
+  command = "npm run build --prefix client" # Build command for the client folder
+  publish = "client/dist"                  # Path to the build output folder
 
 [[redirects]]
   from = "/*"
