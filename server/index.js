@@ -34,5 +34,7 @@ app.use("/api/cart", cartRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/users", shipmentRoutes);
-
+app.get('*', (req, res) => {
+    res.sendFile(path.join(process.cwd(),'client','dist','index.html'));
+  });
 app.listen(process.env.PORT || 5000, console.log("on 5000 port"));
