@@ -9,8 +9,8 @@ services:
       - key: PORT
         value: 5000
 
-staticSites:
   - name: ecommerce-frontend
+    type: static
     buildCommand: cd client && npm install && npm run build
     publishPath: client/dist
     plan: free
