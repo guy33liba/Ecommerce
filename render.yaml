@@ -11,5 +11,6 @@ services:
 
   - name: ecommerce-frontend
     type: web
+    runtime: static
     buildCommand: cd client && npm install && npm run build
     plan: free
