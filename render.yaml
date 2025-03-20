@@ -1,4 +1,9 @@
 services:
+  - name: ecommerce-frontend
+    type: web
+    runtime: static
+    buildCommand: cd client && npm install && npm run build
+  
   - name: ecommerce-backend
     type: web
     env: node
@@ -8,8 +13,3 @@ services:
     envVars:
       - key: PORT
         value: 5000
-
-  - name: ecommerce-frontend
-    type: web
-    runtime: static
-    buildCommand: cd client && npm install && npm run build
