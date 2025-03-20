@@ -10,6 +10,7 @@ services:
         value: 5000
 
   - name: ecommerce-frontend
+    type: web
     buildCommand: cd client && npm install && npm run build
     publishPath: client/dist
     plan: free
