@@ -35,7 +35,7 @@ router.post("/", async (req, res) => {
   });
 
   await newOrder.save();
-
+  debugger;
   res.status(200).json({
    message: "Order placed Successfully",
    order: newOrder,
@@ -62,7 +62,7 @@ router.get("/all", async (req, res) => {
     shipmentDetails: shipments,
    });
   }
-
+  console.log(allShipments.total);
   res.status(200).json(allShipments);
  } catch (error) {
   console.error("Error Fetching orders or shipments:", error);
