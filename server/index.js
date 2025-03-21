@@ -20,13 +20,10 @@ const __dirname = path.dirname(__filename);
 app.use(express.json());
 app.use(cors({ origin: "*" }));
 
-const clientBuildPath = path.join(__dirname, "client", "dist");
-app.use(express.static(clientBuildPath));
-
+app.use(express.static(path.join(__dirname, "client/dist")));
 app.get("*", (req, res) => {
- res.sendFile(path.join(clientBuildPath, "index.html"));
+ res.sendFile(path.join(__dirname, "client/dist", "index.html"));
 });
-console.log("Client build path:", clientBuildPath);
 mongoose
  .connect(mongoUri)
  .then(async () => {
