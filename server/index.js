@@ -9,15 +9,21 @@ import orderRoutes from "./routes/orderRoutes.js";
 import userRoutes from "./routes/authenticationRoute.js";
 import shipmentRoutes from "./routes/shipmentRoutes.js";
 import path from "path";
+import { fileURLToPath } from "url";
+const app = express();
+
 const mongoUri = process.env.MONGO_URI;
 
-const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(express.json());
 app.use(cors({ origin: "*" }));
 
-app.use(express.static("/client/"));
-
+app.use(express.static(path.join(__dirname, "/client/dist")));
+app.get("*", (req, res) => {
+ res.sendFile(path.join(__dirname, "/client/dist/index.html"));
+});
 mongoose
  .connect(mongoUri)
  .then(async () => {
