@@ -24,9 +24,7 @@ const clientBuildPath = path.join(__dirname, "client", "dist");
 app.use(express.static(clientBuildPath));
 
 app.get("*", (req, res) => {
- const filePath = path.join(clientBuildPath, "index.html");
- console.log("Serving file from:", filePath);
- res.sendFile(filePath);
+ res.sendFile(path.join(clientBuildPath, "index.html"));
 });
 console.log("Client build path:", clientBuildPath);
 mongoose
