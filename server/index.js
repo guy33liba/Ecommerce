@@ -20,11 +20,9 @@ const __dirname = path.dirname(__filename);
 app.use(express.json());
 app.use(cors({ origin: "*" }));
 
-app.use(express.static(path.join(__dirname, "client", "dist")));
-
-// Catch-all route to serve the index.html file from dist folder
+app.use(express.static(path.join(__dirname, "/client/dist")));
 app.get("*", (req, res) => {
- res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+ res.sendFile(path.join(__dirname, "/client/dist/index.html"));
 });
 mongoose
  .connect(mongoUri)
