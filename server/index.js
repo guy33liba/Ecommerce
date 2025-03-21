@@ -20,10 +20,15 @@ const __dirname = path.dirname(__filename);
 app.use(express.json());
 app.use(cors({ origin: "*" }));
 
-app.use(express.static(path.join(__dirname, "client", "dist")));
+const clientBuildPath = path.join(__dirname, "client", "dist");
+app.use(express.static(clientBuildPath));
+
 app.get("*", (req, res) => {
- res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+ const filePath = path.join(clientBuildPath, "index.html");
+ console.log("Serving file from:", filePath);
+ res.sendFile(filePath);
 });
+console.log("Client build path:", clientBuildPath);
 mongoose
  .connect(mongoUri)
  .then(async () => {
