@@ -50,9 +50,13 @@ router.post("/login", async (req, res) => {
   }
   console.log(user);
   // Generate a JWT token and send it back to the user
-  const token = jwt.sign({ _id: user._id, name: user.name, email: user.email }, "jwtsecret", {
-   expiresIn: "30d",
-  });
+  const token = jwt.sign(
+   { _id: user._id, name: user.name, email: user.email },
+   process.env.JWT_SECRET,
+   {
+    expiresIn: "30d",
+   }
+  );
   res.status(200).json({ token, user: { name: user.name, email: user.email } });
  } catch (error) {
   res.status(500).json({ message: "Server error", error });
@@ -68,7 +72,7 @@ export const authenticateUser = async (req, res, next) => {
  }
 
  try {
-  const decoded = jwt.verify(token, "jwtsecret"); // Ensure you have a valid secret
+  const decoded = jwt.verify(token, process.env.JWT_SECRET); // Ensure you have a valid secret
   const user = await User.findById(decoded._id);
   if (!user) {
    return res.status(404).json({ message: "User not found" });
